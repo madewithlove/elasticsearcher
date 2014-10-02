@@ -2,7 +2,11 @@
 
 namespace ElasticSearcher;
 
-class IndexManager
+/**
+ * Manager for everything index related. Holds a container for
+ * used indexes. Also holds basic CRUD operations on those indexes.
+ */
+class IndicesManager
 {
 	/**
 	 * @var array

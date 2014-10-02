@@ -20,9 +20,9 @@ class ElasticSearcher
 	private $client;
 
 	/**
-	 * @var IndexedManager
+	 * @var IndicesManager
 	 */
-	private $indexesManager;
+	private $indicesManager;
 
 	/**
 	 * @param Environment $environment
@@ -66,12 +66,12 @@ class ElasticSearcher
 	/**
 	 * @return IndexManager
 	 */
-	public function indexManager()
+	public function indicesManager()
 	{
-		if (!$this->indexesManager) {
-			$this->indexesManager = new IndexManager($this);
+		if (!$this->indicesManager) {
+			$this->indicesManager = new IndicesManager($this);
 		}
 
-		return $this->indexesManager;
+		return $this->indicesManager;
 	}
 }
