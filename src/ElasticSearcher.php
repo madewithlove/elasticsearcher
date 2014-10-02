@@ -20,7 +20,7 @@ class ElasticSearcher
 	private $client;
 
 	/**
-	 * @var
+	 * @var IndexedManager
 	 */
 	private $indexesManager;
 
@@ -48,11 +48,11 @@ class ElasticSearcher
 	}
 
 	/**
-	 * @return \Elasticsearch\Client
+	 * @param \Elasticsearch\Client $client
 	 */
-	public function setClient()
+	public function setClient(Client $client)
 	{
-		return $this->client;
+		$this->client = $client;
 	}
 
 	/**

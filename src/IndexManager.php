@@ -75,7 +75,7 @@ class IndexManager
 	 */
 	public function indices()
 	{
-		return $this->elasticSearcher->getClient()->indices()->getMapping('_all');
+		return $this->elasticSearcher->getClient()->indices()->getMapping(['_all']);
 	}
 
 	/**
