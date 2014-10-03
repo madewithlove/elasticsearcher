@@ -157,8 +157,51 @@ class IndicesManager
 	}
 
 	/**
-	 * @param Abstracts\IndexAbstract $index
-	 * @param array                   $data
+	 * @return bool
+	 *
+	 * @param string $reference
+	 */
+	public function exists($reference)
+	{
+		if ($this->isRegistered($reference)) {
+			$index = $this->indices[$reference];
+
+			$params = [
+				'index' => $index->getName()
+			];
+
+			return $this->elasticSearcher->getClient()->indices()->exists($params);
+		}
+
+		return false;
+	}
+
+	/**
+	 * @return bool
+	 *
+	 * @param string $reference
+	 * @param string $type
+	 */
+	public function existsType($reference, $type)
+	{
+		if ($this->isRegistered($reference)) {
+			$index = $this->indices[$reference];
+
+			$params = [
+				'index' => $index->getName(),
+				'type'  => $type
+			];
+
+			return $this->elasticSearcher->getClient()->indices()->existsType($params);
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param string $reference
+	 * @param string $type
+	 * @param array  $data
 	 */
 	public function index(Abstracts\IndexAbstract $index, array $data)
 	{
