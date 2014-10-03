@@ -33,7 +33,7 @@ used in CRUD/query actions.
 The index manager is accessed via:
 
 ```
-$manager = $searcher->indicesManager()`
+$manager = $searcher->indicesManager();
 ```
 
 ### Defining an index
