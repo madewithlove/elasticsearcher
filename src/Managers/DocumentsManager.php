@@ -85,4 +85,29 @@ class DocumentsManager extends ManagerAbstract
 			return $this->elasticSearcher->getClient()->update($params);
 		}
 	}
+
+	/**
+	 * @return array
+	 *
+	 * @param string $reference
+	 * @param string $type
+	 * @param string $id
+	 * @param array  $data
+	 */
+	public function exists($reference, $type, $id)
+	{
+		if ($this->elasticSearcher->indicesManager()->isRegistered($reference)) {
+			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$reference];
+
+			$params = [
+				'index' => $index->getName(),
+				'type'  => $type,
+				'id'    => $id,
+			];
+
+			return $this->elasticSearcher->getClient()->exists($params);
+		}
+
+		return false;
+	}
 }
