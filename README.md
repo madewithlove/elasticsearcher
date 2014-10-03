@@ -39,7 +39,7 @@ $manager = $searcher->indicesManager();
 ### Defining an index
 
 A simple [index](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/_basic_concepts.html#_index) exists
-out of a name and one or more mappings (types). This can be created as:
+out of a name and one or more types (+mappings). This can be created as:
 
 ```
 class SuggestionsIndex extends \ElasticSearcher\Abstracts\IndexAbstract
@@ -49,7 +49,7 @@ class SuggestionsIndex extends \ElasticSearcher\Abstracts\IndexAbstract
     return 'suggestions';
   }
 
-  public function getMappings()
+  public function getTypes()
   {
     return array(
       'books'   => array(

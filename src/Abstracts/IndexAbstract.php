@@ -15,7 +15,7 @@ abstract class IndexAbstract
 	/**
 	 * @return array
 	 */
-	abstract public function getMappings();
+	abstract public function getTypes();
 
 	/**
 	 * @return array
@@ -23,7 +23,7 @@ abstract class IndexAbstract
 	public function getBody()
 	{
 		return [
-			'mappings' => $this->getMappings()
+			'mappings' => $this->getTypes()
 		];
 	}
 
@@ -32,10 +32,10 @@ abstract class IndexAbstract
 	 *
 	 * @return mixed
 	 */
-	public function getMapping($type)
+	public function getType($type)
 	{
-		$mappings = $this->getMappings();
+		$types = $this->getTypes();
 
-		return $mappings[$type];
+		return $types[$type];
 	}
 }

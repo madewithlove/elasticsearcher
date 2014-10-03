@@ -90,8 +90,10 @@ class IndicesManager
 		if ($this->isRegistered($reference)) {
 			$index = $this->indices[$reference];
 
-			$params['index'] = $index->getName();
-			$params['body']  = $index->getBody();
+			$params = [
+				'index' => $index->getName(),
+				'body'  => $index->getBody()
+			];
 
 			$this->elasticSearcher->getClient()->indices()->create($params);
 		}
@@ -107,7 +109,7 @@ class IndicesManager
 		$params['type']  = $index->getType();
 		$params['body']  = $data;
 		// We need an ID, if provided use that, otherwise create one based on the data.
-		$params['id']    = array_key_exists('id', $data) ? $data['id'] : sha1($data);
+		$params['id'] = array_key_exists('id', $data) ? $data['id'] : sha1($data);
 
 		$this->client->index($params);
 	}
