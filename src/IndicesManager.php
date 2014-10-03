@@ -100,6 +100,40 @@ class IndicesManager
 	}
 
 	/**
+	 * @param string $reference
+	 */
+	public function delete($reference)
+	{
+		if ($this->isRegistered($reference)) {
+			$index = $this->indices[$reference];
+
+			$params = [
+				'index' => $index->getName()
+			];
+
+			$this->elasticSearcher->getClient()->indices()->delete($params);
+		}
+	}
+
+	/**
+	 * @param string $reference
+	 * @param string $type
+	 */
+	public function deleteType($reference, $type)
+	{
+		if ($this->isRegistered($reference)) {
+			$index = $this->indices[$reference];
+
+			$params = [
+				'index' => $index->getName(),
+				'type'  => $type
+			];
+
+			$this->elasticSearcher->getClient()->indices()->deleteMapping($params);
+		}
+	}
+
+	/**
 	 * @param Abstracts\IndexAbstract $index
 	 * @param array                   $data
 	 */
