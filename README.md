@@ -14,7 +14,7 @@ Add this to your `composer.json`:
 # Usage
 
 ```
-	use ElasticSearcher\Environment;
+  use ElasticSearcher\Environment;
   use ElasticSearcher\ElasticSearcher;
 
   $env = new Environment(
@@ -33,7 +33,7 @@ The index manager is accessed via:
 
 ```
 $manager = $searcher->indicesManager()`
-``
+```
 
 ### Defining an index
 
