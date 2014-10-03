@@ -4,6 +4,7 @@ namespace ElasticSearcher;
 
 use Elasticsearch\Client;
 use ElasticSearcher\Managers\IndicesManager;
+use ElasticSearcher\Managers\DocumentsManager;
 
 /**
  * Package.
@@ -24,6 +25,11 @@ class ElasticSearcher
 	 * @var IndicesManager
 	 */
 	private $indicesManager;
+
+	/**
+	 * @var DocumentsManager
+	 */
+	private $documentsManager;
 
 	/**
 	 * @param Environment $environment
@@ -74,5 +80,17 @@ class ElasticSearcher
 		}
 
 		return $this->indicesManager;
+	}
+
+	/**
+	 * @return DocumentManager
+	 */
+	public function documentsManager()
+	{
+		if (!$this->documentsManager) {
+			$this->documentsManager = new DocumentsManager($this);
+		}
+
+		return $this->documentsManager;
 	}
 }
