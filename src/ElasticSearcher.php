@@ -3,6 +3,7 @@
 namespace ElasticSearcher;
 
 use Elasticsearch\Client;
+use ElasticSearcher\Managers\IndicesManager;
 
 /**
  * Package.

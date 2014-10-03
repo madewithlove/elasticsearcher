@@ -1,6 +1,9 @@
 <?php
 
-namespace ElasticSearcher;
+namespace ElasticSearcher\Managers;
+
+use ElasticSearcher\ElasticSearcher;
+use ElasticSearcher\Abstracts\IndexAbstract;
 
 /**
  * Manager for everything index related. Holds a container for
@@ -22,12 +25,12 @@ class IndicesManager
 	}
 
 	/**
-	 * @return Abstracts\IndexAbstract
+	 * @return IndexAbstract
 	 *
-	 * @param string                  $reference
-	 * @param Abstracts\IndexAbstract $index
+	 * @param string        $reference
+	 * @param IndexAbstract $index
 	 */
-	public function register($reference, Abstracts\IndexAbstract $index)
+	public function register($reference, IndexAbstract $index)
 	{
 		$this->indices[$reference] = $index;
 
