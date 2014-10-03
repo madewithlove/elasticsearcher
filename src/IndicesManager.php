@@ -199,18 +199,29 @@ class IndicesManager
 	}
 
 	/**
+	 * @return array
+	 *
 	 * @param string $reference
 	 * @param string $type
 	 * @param array  $data
 	 */
-	public function index(Abstracts\IndexAbstract $index, array $data)
+	public function index($reference, $type, array $data)
 	{
-		$params['index'] = $index->getName();
-		$params['type']  = $index->getType();
-		$params['body']  = $data;
-		// We need an ID, if provided use that, otherwise create one based on the data.
-		$params['id'] = array_key_exists('id', $data) ? $data['id'] : sha1($data);
+		if ($this->isRegistered($reference)) {
+			$index = $this->indices[$reference];
 
-		$this->client->index($params);
+			$params = [
+				'index' => $index->getName(),
+				'type'  => $type,
+				'body'  => $data
+			];
+
+			// If an ID exists in the data set, use it, otherwise let elasticsearch generate one.
+			if (array_key_exists('id', $data)) {
+				$params['id'] = $data['id'];
+			}
+
+			return $this->elasticSearcher->getClient()->index($params);
+		}
 	}
 }
