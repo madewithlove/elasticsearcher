@@ -2,26 +2,13 @@
 
 namespace ElasticSearcher\Managers;
 
-use ElasticSearcher\ElasticSearcher;
+use ElasticSearcher\Abstracts\ManagerAbstract;
 
 /**
  * Manager for everything document related. Holds basic CRUD operations on documents.
  */
-class DocumentsManager
+class DocumentsManager extends ManagerAbstract
 {
-	/**
-	 * @var ElasticSearcher
-	 */
-	private $elasticSearcher;
-
-	/**
-	 * @param ElasticSearcher $elasticSearcher
-	 */
-	public function __construct(ElasticSearcher $elasticSearcher)
-	{
-		$this->elasticSearcher = $elasticSearcher;
-	}
-
 	/**
 	 * @return array
 	 *

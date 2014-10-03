@@ -2,32 +2,19 @@
 
 namespace ElasticSearcher\Managers;
 
-use ElasticSearcher\ElasticSearcher;
 use ElasticSearcher\Abstracts\IndexAbstract;
+use ElasticSearcher\Abstracts\ManagerAbstract;
 
 /**
  * Manager for everything index related. Holds a container for
  * used indexes. Also holds basic CRUD operations on those indexes.
  */
-class IndicesManager
+class IndicesManager extends ManagerAbstract
 {
-	/**
-	 * @var ElasticSearcher
-	 */
-	private $elasticSearcher;
-
 	/**
 	 * @var array
 	 */
 	private $indices = array();
-
-	/**
-	 * @param ElasticSearcher $elasticSearcher
-	 */
-	public function __construct(ElasticSearcher $elasticSearcher)
-	{
-		$this->elasticSearcher = $elasticSearcher;
-	}
 
 	/**
 	 * @return IndexAbstract
