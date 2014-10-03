@@ -1,6 +1,6 @@
 # elasticsearcher
 
-This agnostic package is a wrapper around the [elasticsearch PHP API](http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/index.html).
+This agnostic package is a lightweight wrapper around the [elasticsearch PHP API](http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/index.html).
 It allows for easier query building and index management. It still gives access to the elasticsearch PHP client, for more
 advanced usage.
 
@@ -28,12 +28,12 @@ $searcher = new ElasticSearcher($env);
 
 The package includes an indices manager. You are required to register indices that you'll using, whether its for
 CRUD on the indices or for quering. The indices need to be registered with a unique reference which can then be
-used in CRUD/query actions.
+used in CRUD and query actions.
 
 The index manager is accessed via:
 
 ```
-$manager = $searcher->indicesManager()`
+$manager = $searcher->indicesManager();
 ```
 
 ### Defining an index
@@ -74,12 +74,12 @@ class SuggestionsIndex extends \ElasticSearcher\Abstracts\IndexAbstract
 }
 ```
 
-This the minimum required for defining and index. If you require more extensive configuration, override the `getBody`
+This the minimum required for defining an index. If you require more extensive configuration, override the `getBody`
 method.
 
 ### Index registration
 
-The indexes should be registered with the indices manager for further use in the package. Every index needs a
+The indices should be registered with the indices manager for further use in the package. Every index needs a
 reference, which will be used for accessing the index.
 
 ```
@@ -97,13 +97,13 @@ $searcher->indicesManager()->registerIndices($indices);
 // Other
 $searcher->indexManager()->unregister('suggestions');
 $searcher->indexManager()->isRegistered('suggestions');
-$searcher->indexManager()->registeredIndexes();
+$searcher->indexManager()->registeredIndices();
 ```
 
 ### Index CRUD
 
 ```
-// Indexes that exist in the server, not linked to the registered indexes.
+// Indices that exist in the server, not linked to the registered indices.
 $searcher->indicesManager()->indices());
 
 // Other
