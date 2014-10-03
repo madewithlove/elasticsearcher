@@ -10,6 +10,8 @@ use ElasticSearcher\Abstracts\ManagerAbstract;
 class DocumentsManager extends ManagerAbstract
 {
 	/**
+	 * Create a document.
+	 *
 	 * @return array
 	 *
 	 * @param string $reference
@@ -33,6 +35,54 @@ class DocumentsManager extends ManagerAbstract
 			}
 
 			return $this->elasticSearcher->getClient()->index($params);
+		}
+	}
+
+	/**
+	 * @return array
+	 *
+	 * @param string $reference
+	 * @param string $type
+	 * @param string $id
+	 */
+	public function delete($reference, $type, $id)
+	{
+		if ($this->elasticSearcher->indicesManager()->isRegistered($reference)) {
+			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$reference];
+
+			$params = [
+				'index' => $index->getName(),
+				'type'  => $type,
+				'id'    => $id
+			];
+
+			return $this->elasticSearcher->getClient()->delete($params);
+		}
+	}
+
+	/**
+	 * Partial updating of an existing document.
+	 *
+	 * @return array
+	 *
+	 * @param string $reference
+	 * @param string $type
+	 * @param string $id
+	 * @param array  $data
+	 */
+	public function update($reference, $type, $id, array $data)
+	{
+		if ($this->elasticSearcher->indicesManager()->isRegistered($reference)) {
+			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$reference];
+
+			$params = [
+				'index' => $index->getName(),
+				'type'  => $type,
+				'id'    => $id,
+				'body'  => ['doc' => $data]
+			];
+
+			return $this->elasticSearcher->getClient()->update($params);
 		}
 	}
 }
