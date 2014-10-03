@@ -100,6 +100,29 @@ class IndicesManager
 	}
 
 	/**
+	 * Update the index and all its types. This should be used when wanting to reflect changes
+	 * in the Index object with the elasticsearch server.
+	 *
+	 * @param string $reference
+	 */
+	public function update($reference)
+	{
+		if ($this->isRegistered($reference)) {
+			$index = $this->indices[$reference];
+
+			foreach ($index->getTypes() as $type => $typeBody) {
+				$params = [
+					'index' => $index->getName(),
+					'type'  => $type,
+					'body'  => [$type => $typeBody]
+				];
+
+				$this->elasticSearcher->getClient()->indices()->putMapping($params);
+			}
+		}
+	}
+
+	/**
 	 * @param string $reference
 	 */
 	public function delete($reference)

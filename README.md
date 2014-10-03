@@ -109,6 +109,7 @@ $searcher->indicesManager()->indices());
 // Other
 $searcher->indicesManager()->exists('listings');
 $searcher->indicesManager()->create('suggestions');
+$searcher->indicesManager()->update('suggestions');
 $searcher->indicesManager()->delete('suggestions');
 $searcher->indicesManager()->deleteType('suggestions', 'movies');
 ```
