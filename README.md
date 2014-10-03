@@ -7,20 +7,21 @@ advanced usage.
 # Installation
 
 Add this to your `composer.json`:
+
 ```
-	"madewithlove/elasticsearcher": "dev-master"
+"madewithlove/elasticsearcher": "dev-master"
 ```
 
 # Usage
 
 ```
-  use ElasticSearcher\Environment;
-  use ElasticSearcher\ElasticSearcher;
+use ElasticSearcher\Environment;
+use ElasticSearcher\ElasticSearcher;
 
-  $env = new Environment(
-  	['hosts' => ['localhost:9200']]
-  );
-  $searcher = new ElasticSearcher($env);
+$env = new Environment(
+  ['hosts' => ['localhost:9200']]
+);
+$searcher = new ElasticSearcher($env);
 ```
 
 ## Index management
@@ -43,33 +44,33 @@ out of a name and one or more mappings (types). This can be created as:
 ```
 class SuggestionsIndex extends \ElasticSearcher\Abstracts\IndexAbstract
 {
-	public function getName()
-	{
-		return 'suggestions';
-	}
+  public function getName()
+  {
+    return 'suggestions';
+  }
 
-	public function getMappings()
-	{
-		return array(
-			'books'   => array(
-				'properties' => array(
-					'id'   => array(
-						'type' => 'integer'
-					),
-					'name' => array(
-						'type' => 'string'
-					)
-				)
-			),
-			'movies' => array(
-				'properties' => array(
-					'name' => array(
-						'type' => 'string'
-					)
-				)
-			)
-		);
-	}
+  public function getMappings()
+  {
+    return array(
+      'books'   => array(
+        'properties' => array(
+          'id'   => array(
+            'type' => 'integer'
+          ),
+          'name' => array(
+            'type' => 'string'
+          )
+        )
+      ),
+      'movies' => array(
+        'properties' => array(
+          'name' => array(
+            'type' => 'string'
+          )
+        )
+      )
+    );
+  }
 }
 ```
 
@@ -89,7 +90,7 @@ $searcher->indicesManager()->register('suggestions', $suggestionsIndex);
 
 // Grouped registration
 $indices = array(
-	'suggestions'  => $suggestionsIndex,
+  'suggestions'  => $suggestionsIndex,
 );
 $searcher->indicesManager()->registerIndices($indices);
 
@@ -102,13 +103,13 @@ $searcher->indexManager()->registeredIndexes();
 ### Index CRUD
 
 ```
-	// Indexes that exist in the server, not linked to the registered indexes.
-	$searcher->indicesManager()->indices());
+// Indexes that exist in the server, not linked to the registered indexes.
+$searcher->indicesManager()->indices());
 
-	// Other
-  $searcher->indicesManager()->exists('listings');
-  $searcher->indicesManager()->create('suggestions');
-  $searcher->indicesManager()->remove($listingsIndex);
+// Other
+$searcher->indicesManager()->exists('listings');
+$searcher->indicesManager()->create('suggestions');
+$searcher->indicesManager()->remove($listingsIndex);
 ```
 
 ## Query building
@@ -120,12 +121,12 @@ todo
 You can access the client instance from the elasticsearch PHP API by using:
 
 ```
-	$client = $searcher->getClient();
+$client = $searcher->getClient();
 ```
 
 If for some reason you want you use your own client instance, you can overwrite the one created
 by the package:
 
 ```
-	$searcher->setClient($client);
+$searcher->setClient($client);
 ```
