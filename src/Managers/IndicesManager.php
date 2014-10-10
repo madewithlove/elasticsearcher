@@ -76,7 +76,6 @@ class IndicesManager extends ManagerAbstract
 	 * If you do not want the exception being thrown, use getRegistered first.
 	 *
 	 * @return IndexAbstract
-	 *
 	 * @throws Exception
 	 *
 	 * @param string $indexName
@@ -99,6 +98,31 @@ class IndicesManager extends ManagerAbstract
 	public function indices()
 	{
 		return $this->elasticSearcher->getClient()->indices()->getMapping(['_all']);
+	}
+
+	/**
+	 * @return array
+	 *
+	 * @param string $indexName
+	 */
+	public function get($indexName)
+	{
+		$index = $this->getRegistered($indexName);
+
+		return $this->elasticSearcher->getClient()->indices()->getMapping(['index' => $index->getName()]);
+	}
+
+	/**
+	 * @return array
+	 *
+	 * @param string $indexName
+	 * @param string $type
+	 */
+	public function getType($indexName, $type)
+	{
+		$index = $this->getRegistered($indexName);
+
+		return $this->elasticSearcher->getClient()->indices()->getMapping(['index' => $index->getName(), 'type' => $type]);
 	}
 
 	/**
