@@ -198,8 +198,10 @@ class IndicesManager extends ManagerAbstract
 	 */
 	public function exists($indexName)
 	{
+		$index = $this->getRegistered($indexName);
+
 		$params = [
-			'index' => $indexName
+			'index' => $index->getName()
 		];
 
 		return $this->elasticSearcher->getClient()->indices()->exists($params);
@@ -213,8 +215,10 @@ class IndicesManager extends ManagerAbstract
 	 */
 	public function existsType($indexName, $type)
 	{
+		$index = $this->getRegistered($indexName);
+
 		$params = [
-			'index' => $indexName,
+			'index' => $index->getName(),
 			'type'  => $type
 		];
 
