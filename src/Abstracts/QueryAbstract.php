@@ -36,6 +36,13 @@ abstract class QueryAbstract
 	protected $body;
 
 	/**
+	 * Data that can be used when building a query.
+	 *
+	 * @var array
+	 */
+	protected $data = array();
+
+	/**
 	 * Prepare the query. Add filters, sorting, ....
 	 */
 	abstract protected function setup();
@@ -46,6 +53,30 @@ abstract class QueryAbstract
 	public function __construct(ElasticSearcher $searcher)
 	{
 		$this->searcher = $searcher;
+	}
+
+	/**
+	 * Add data that can be accessed during query building.
+	 *
+	 * @param array $data
+	 */
+	public function addData(array $data)
+	{
+		$this->data = array_merge($this->data, $data);
+	}
+
+	/**
+	 * @return array
+	 *
+	 * @param null|string
+	 */
+	public function getData($key = null)
+	{
+		if ($key !== null) {
+			return array_key_exists($key, $this->data) ? $this->data[$key] : null;
+		}
+
+		return $this->data;
 	}
 
 	/**
