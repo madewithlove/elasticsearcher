@@ -8,13 +8,13 @@ advanced usage.
 
 Add this to your `composer.json`:
 
-```
+```json
 "madewithlove/elasticsearcher": "dev-master"
 ```
 
 # Usage
 
-```
+```php
 use ElasticSearcher\Environment;
 use ElasticSearcher\ElasticSearcher;
 
@@ -29,7 +29,7 @@ $searcher = new ElasticSearcher($env);
 The package includes an indices manager. You are required to register indices that you'll using, whether its for
 CRUD on the indices or for quering. The index manager is accessed via:
 
-```
+```php
 $manager = $searcher->indicesManager();
 ```
 
@@ -38,7 +38,7 @@ $manager = $searcher->indicesManager();
 A simple [index](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/_basic_concepts.html#_index) exists
 out of a name and one or more types (+mappings). This can be created as:
 
-```
+```php
 class SuggestionsIndex extends \ElasticSearcher\Abstracts\IndexAbstract
 {
   public function getName()
@@ -79,7 +79,7 @@ method.
 The indices should be registered with the indices manager for further use in the package. The index object is only
 used during this registration, later on it can accessed by its name (via `getName`).
 
-```
+```php
 $suggestionsIndex  = new SuggestionsIndex();
 
 // Single registration
@@ -99,7 +99,7 @@ $searcher->indexManager()->registeredIndices();
 
 ### Index CRUD
 
-```
+```php
 // Indices that exist in the server, not linked to the registered indices.
 $searcher->indicesManager()->indices());
 $searcher->indicesManager()->get('suggestions'));
@@ -118,7 +118,7 @@ $searcher->indicesManager()->deleteType('suggestions', 'movies');
 
 The document manager allows easier CRUD to the documents. The document manager is accessed via:
 
-```
+```php
 $manager = $searcher->documentsManager();
 
 $data = [
@@ -140,13 +140,13 @@ todo
 
 You can access the client instance from the elasticsearch PHP API by using:
 
-```
+```php
 $client = $searcher->getClient();
 ```
 
 If for some reason you want you use your own client instance, you can overwrite the one created
 by the package:
 
-```
+```php
 $searcher->setClient($client);
 ```
