@@ -128,6 +128,8 @@ $data = [
 $manager->index('suggestions', 'movies', $data);
 $manager->update('suggestions', 'movies', 123, ['name' => 'Fight Club 2014']);
 $manager->delete('suggestions', 'movies', 123);
+$manager->exists('suggestions', 'movies', 123);
+$manager->get('suggestions', 'movies', 123);
 ```
 
 ## Query building
