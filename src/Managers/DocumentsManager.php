@@ -20,22 +20,20 @@ class DocumentsManager extends ManagerAbstract
 	 */
 	public function index($indexName, $type, array $data)
 	{
-		if ($this->elasticSearcher->indicesManager()->isRegistered($indexName)) {
-			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$indexName];
+		$index = $this->elasticSearcher->indicesManager()->getRegistered($indexName);
 
-			$params = [
-				'index' => $index->getName(),
-				'type'  => $type,
-				'body'  => $data
-			];
+		$params = [
+			'index' => $index->getName(),
+			'type'  => $type,
+			'body'  => $data
+		];
 
-			// If an ID exists in the data set, use it, otherwise let elasticsearch generate one.
-			if (array_key_exists('id', $data)) {
-				$params['id'] = $data['id'];
-			}
-
-			return $this->elasticSearcher->getClient()->index($params);
+		// If an ID exists in the data set, use it, otherwise let elasticsearch generate one.
+		if (array_key_exists('id', $data)) {
+			$params['id'] = $data['id'];
 		}
+
+		return $this->elasticSearcher->getClient()->index($params);
 	}
 
 	/**
@@ -47,17 +45,15 @@ class DocumentsManager extends ManagerAbstract
 	 */
 	public function delete($indexName, $type, $id)
 	{
-		if ($this->elasticSearcher->indicesManager()->isRegistered($indexName)) {
-			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$indexName];
+		$index = $this->elasticSearcher->indicesManager()->getRegistered($indexName);
 
-			$params = [
-				'index' => $index->getName(),
-				'type'  => $type,
-				'id'    => $id
-			];
+		$params = [
+			'index' => $index->getName(),
+			'type'  => $type,
+			'id'    => $id
+		];
 
-			return $this->elasticSearcher->getClient()->delete($params);
-		}
+		return $this->elasticSearcher->getClient()->delete($params);
 	}
 
 	/**
@@ -72,42 +68,35 @@ class DocumentsManager extends ManagerAbstract
 	 */
 	public function update($indexName, $type, $id, array $data)
 	{
-		if ($this->elasticSearcher->indicesManager()->isRegistered($indexName)) {
-			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$indexName];
+		$index = $this->elasticSearcher->indicesManager()->getRegistered($indexName);
 
-			$params = [
-				'index' => $index->getName(),
-				'type'  => $type,
-				'id'    => $id,
-				'body'  => ['doc' => $data]
-			];
+		$params = [
+			'index' => $index->getName(),
+			'type'  => $type,
+			'id'    => $id,
+			'body'  => ['doc' => $data]
+		];
 
-			return $this->elasticSearcher->getClient()->update($params);
-		}
+		return $this->elasticSearcher->getClient()->update($params);
 	}
 
 	/**
-	 * @return array
+	 * @return bool
 	 *
 	 * @param string $indexName
 	 * @param string $type
 	 * @param string $id
-	 * @param array  $data
 	 */
 	public function exists($indexName, $type, $id)
 	{
-		if ($this->elasticSearcher->indicesManager()->isRegistered($indexName)) {
-			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$indexName];
+		$index = $this->elasticSearcher->indicesManager()->getRegistered($indexName);
 
-			$params = [
-				'index' => $index->getName(),
-				'type'  => $type,
-				'id'    => $id,
-			];
+		$params = [
+			'index' => $index->getName(),
+			'type'  => $type,
+			'id'    => $id,
+		];
 
-			return $this->elasticSearcher->getClient()->exists($params);
-		}
-
-		return false;
+		return $this->elasticSearcher->getClient()->exists($params);
 	}
 }
