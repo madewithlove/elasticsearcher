@@ -27,10 +27,7 @@ $searcher = new ElasticSearcher($env);
 ## Index management
 
 The package includes an indices manager. You are required to register indices that you'll using, whether its for
-CRUD on the indices or for quering. The indices need to be registered with a unique reference which can then be
-used in CRUD and query actions.
-
-The index manager is accessed via:
+CRUD on the indices or for quering. The index manager is accessed via:
 
 ```
 $manager = $searcher->indicesManager();
@@ -79,18 +76,18 @@ method.
 
 ### Index registration
 
-The indices should be registered with the indices manager for further use in the package. Every index needs a
-reference, which will be used for accessing the index.
+The indices should be registered with the indices manager for further use in the package. The index object is only
+used during this registration, later on it can accessed by its name (via `getName`).
 
 ```
 $suggestionsIndex  = new SuggestionsIndex();
 
 // Single registration
-$searcher->indicesManager()->register('suggestions', $suggestionsIndex);
+$searcher->indicesManager()->register($suggestionsIndex);
 
 // Grouped registration
 $indices = array(
-  'suggestions'  => $suggestionsIndex,
+  $suggestionsIndex
 );
 $searcher->indicesManager()->registerIndices($indices);
 

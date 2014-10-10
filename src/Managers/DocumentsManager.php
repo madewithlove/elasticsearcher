@@ -14,14 +14,14 @@ class DocumentsManager extends ManagerAbstract
 	 *
 	 * @return array
 	 *
-	 * @param string $reference
+	 * @param string $indexName
 	 * @param string $type
 	 * @param array  $data
 	 */
-	public function index($reference, $type, array $data)
+	public function index($indexName, $type, array $data)
 	{
-		if ($this->elasticSearcher->indicesManager()->isRegistered($reference)) {
-			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$reference];
+		if ($this->elasticSearcher->indicesManager()->isRegistered($indexName)) {
+			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$indexName];
 
 			$params = [
 				'index' => $index->getName(),
@@ -41,14 +41,14 @@ class DocumentsManager extends ManagerAbstract
 	/**
 	 * @return array
 	 *
-	 * @param string $reference
+	 * @param string $indexName
 	 * @param string $type
 	 * @param string $id
 	 */
-	public function delete($reference, $type, $id)
+	public function delete($indexName, $type, $id)
 	{
-		if ($this->elasticSearcher->indicesManager()->isRegistered($reference)) {
-			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$reference];
+		if ($this->elasticSearcher->indicesManager()->isRegistered($indexName)) {
+			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$indexName];
 
 			$params = [
 				'index' => $index->getName(),
@@ -65,15 +65,15 @@ class DocumentsManager extends ManagerAbstract
 	 *
 	 * @return array
 	 *
-	 * @param string $reference
+	 * @param string $indexName
 	 * @param string $type
 	 * @param string $id
 	 * @param array  $data
 	 */
-	public function update($reference, $type, $id, array $data)
+	public function update($indexName, $type, $id, array $data)
 	{
-		if ($this->elasticSearcher->indicesManager()->isRegistered($reference)) {
-			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$reference];
+		if ($this->elasticSearcher->indicesManager()->isRegistered($indexName)) {
+			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$indexName];
 
 			$params = [
 				'index' => $index->getName(),
@@ -89,15 +89,15 @@ class DocumentsManager extends ManagerAbstract
 	/**
 	 * @return array
 	 *
-	 * @param string $reference
+	 * @param string $indexName
 	 * @param string $type
 	 * @param string $id
 	 * @param array  $data
 	 */
-	public function exists($reference, $type, $id)
+	public function exists($indexName, $type, $id)
 	{
-		if ($this->elasticSearcher->indicesManager()->isRegistered($reference)) {
-			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$reference];
+		if ($this->elasticSearcher->indicesManager()->isRegistered($indexName)) {
+			$index = $this->elasticSearcher->indicesManager()->registeredIndices()[$indexName];
 
 			$params = [
 				'index' => $index->getName(),

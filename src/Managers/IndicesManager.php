@@ -19,12 +19,11 @@ class IndicesManager extends ManagerAbstract
 	/**
 	 * @return IndexAbstract
 	 *
-	 * @param string        $reference
 	 * @param IndexAbstract $index
 	 */
-	public function register($reference, IndexAbstract $index)
+	public function register(IndexAbstract $index)
 	{
-		$this->indices[$reference] = $index;
+		$this->indices[$index->getName()] = $index;
 
 		return $index;
 	}
@@ -34,31 +33,31 @@ class IndicesManager extends ManagerAbstract
 	 */
 	public function registerIndices(array $indices)
 	{
-		foreach ($indices as $reference => $index) {
-			$this->register($reference, $index);
+		foreach ($indices as $index) {
+			$this->register($index);
 		}
 	}
 
 	/**
-	 * @return Abstracts\IndexAbstract
+	 * @return IndexAbstract
 	 *
-	 * @param string $reference
+	 * @param string $indexName
 	 */
-	public function unregister($reference)
+	public function unregister($indexName)
 	{
-		if ($this->isRegistered($reference)) {
-			unset($this->indices[$reference]);
+		if ($this->isRegistered($indexName)) {
+			unset($this->indices[$indexName]);
 		}
 	}
 
 	/**
 	 * @return bool
 	 *
-	 * @param string $reference
+	 * @param string $indexName
 	 */
-	public function isRegistered($reference)
+	public function isRegistered($indexName)
 	{
-		return array_key_exists($reference, $this->indices);
+		return array_key_exists($indexName, $this->indices);
 	}
 
 	/**
@@ -78,12 +77,12 @@ class IndicesManager extends ManagerAbstract
 	}
 
 	/**
-	 * @param string $reference
+	 * @param string $indexName
 	 */
-	public function create($reference)
+	public function create($indexName)
 	{
-		if ($this->isRegistered($reference)) {
-			$index = $this->indices[$reference];
+		if ($this->isRegistered($indexName)) {
+			$index = $this->indices[$indexName];
 
 			$params = [
 				'index' => $index->getName(),
@@ -98,12 +97,12 @@ class IndicesManager extends ManagerAbstract
 	 * Update the index and all its types. This should be used when wanting to reflect changes
 	 * in the Index object with the elasticsearch server.
 	 *
-	 * @param string $reference
+	 * @param string $indexName
 	 */
-	public function update($reference)
+	public function update($indexName)
 	{
-		if ($this->isRegistered($reference)) {
-			$index = $this->indices[$reference];
+		if ($this->isRegistered($indexName)) {
+			$index = $this->indices[$indexName];
 
 			foreach ($index->getTypes() as $type => $typeBody) {
 				$params = [
@@ -118,12 +117,12 @@ class IndicesManager extends ManagerAbstract
 	}
 
 	/**
-	 * @param string $reference
+	 * @param string $indexName
 	 */
-	public function delete($reference)
+	public function delete($indexName)
 	{
-		if ($this->isRegistered($reference)) {
-			$index = $this->indices[$reference];
+		if ($this->isRegistered($indexName)) {
+			$index = $this->indices[$indexName];
 
 			$params = [
 				'index' => $index->getName()
@@ -134,13 +133,13 @@ class IndicesManager extends ManagerAbstract
 	}
 
 	/**
-	 * @param string $reference
+	 * @param string $indexName
 	 * @param string $type
 	 */
-	public function deleteType($reference, $type)
+	public function deleteType($indexName, $type)
 	{
-		if ($this->isRegistered($reference)) {
-			$index = $this->indices[$reference];
+		if ($this->isRegistered($indexName)) {
+			$index = $this->indices[$indexName];
 
 			$params = [
 				'index' => $index->getName(),
@@ -154,12 +153,12 @@ class IndicesManager extends ManagerAbstract
 	/**
 	 * @return bool
 	 *
-	 * @param string $reference
+	 * @param string $indexName
 	 */
-	public function exists($reference)
+	public function exists($indexName)
 	{
-		if ($this->isRegistered($reference)) {
-			$index = $this->indices[$reference];
+		if ($this->isRegistered($indexName)) {
+			$index = $this->indices[$indexName];
 
 			$params = [
 				'index' => $index->getName()
@@ -174,13 +173,13 @@ class IndicesManager extends ManagerAbstract
 	/**
 	 * @return bool
 	 *
-	 * @param string $reference
+	 * @param string $indexName
 	 * @param string $type
 	 */
-	public function existsType($reference, $type)
+	public function existsType($indexName, $type)
 	{
-		if ($this->isRegistered($reference)) {
-			$index = $this->indices[$reference];
+		if ($this->isRegistered($indexName)) {
+			$index = $this->indices[$indexName];
 
 			$params = [
 				'index' => $index->getName(),
