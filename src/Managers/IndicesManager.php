@@ -4,6 +4,7 @@ namespace ElasticSearcher\Managers;
 
 use ElasticSearcher\Abstracts\IndexAbstract;
 use ElasticSearcher\Abstracts\ManagerAbstract;
+use Exception;
 
 /**
  * Manager for everything index related. Holds a container for
