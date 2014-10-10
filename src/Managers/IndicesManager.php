@@ -109,7 +109,11 @@ class IndicesManager extends ManagerAbstract
 	{
 		$index = $this->getRegistered($indexName);
 
-		return $this->elasticSearcher->getClient()->indices()->getMapping(['index' => $index->getName()]);
+		$params = [
+			'index' => $index->getName()
+		];
+
+		return $this->elasticSearcher->getClient()->indices()->getMapping($params);
 	}
 
 	/**
@@ -122,7 +126,12 @@ class IndicesManager extends ManagerAbstract
 	{
 		$index = $this->getRegistered($indexName);
 
-		return $this->elasticSearcher->getClient()->indices()->getMapping(['index' => $index->getName(), 'type' => $type]);
+		$params = [
+			'index' => $index->getName(),
+			'type'  => $type
+		];
+
+		return $this->elasticSearcher->getClient()->indices()->getMapping($params);
 	}
 
 	/**
