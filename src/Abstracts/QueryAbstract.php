@@ -135,9 +135,15 @@ abstract class QueryAbstract
 	{
 		$query = array();
 
+		// Index always needs to be provided. _all means a cross index search.
 		$query['index'] = empty($this->indices) ? '_all' : implode(',', array_values($this->indices));
-		$query['type']  = empty($this->types) ? '_all' : implode(',', array_values($this->types));
-		$query['body']  = $this->parseAbstracts($this->body);
+
+		// Type is not required, will search in the entire index.
+		if (!empty($this->types)) {
+			$query['type'] = implode(',', array_values($this->types));
+		}
+
+		$query['body'] = $this->parseAbstracts($this->body);
 
 		return $query;
 	}
