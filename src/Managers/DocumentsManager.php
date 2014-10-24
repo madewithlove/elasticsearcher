@@ -37,6 +37,20 @@ class DocumentsManager extends ManagerAbstract
 	}
 
 	/**
+	 * Index a set of documents.
+	 *
+	 * @param string $indexName
+	 * @param string $type
+	 * @param array  $data
+	 */
+	public function bulkIndex($indexName, $type, array $data)
+	{
+		foreach ($data as $item) {
+			$this->index($indexName, $type, $item);
+		}
+	}
+
+	/**
 	 * @return array
 	 *
 	 * @param string $indexName
