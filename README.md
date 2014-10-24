@@ -145,10 +145,10 @@ class MoviesYouMightLikeQuery extends QueryAbstract
 {
 	public function setup()
 	{
-		$this->searchIn('listings', 'amenities');
+		$this->searchIn('suggestions', 'movies');
 
 		// Build the query.
-	  $body = array(
+		$body = array(
 			'query' => array(
 				'filtered' => array(
 					'query' => array(),
