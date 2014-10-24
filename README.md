@@ -6,10 +6,10 @@ advanced usage.
 
 # Installation
 
-Add this to your `composer.json`:
+Installation of the latest version is easy via [composer](https://getcomposer.org/):
 
-```json
-"madewithlove/elasticsearcher": "dev-master"
+```
+composer require madewithlove/elasticsearcher
 ```
 
 # Usage
