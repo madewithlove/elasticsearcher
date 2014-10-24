@@ -33,7 +33,7 @@ abstract class QueryAbstract
 	 *
 	 * @var array
 	 */
-	protected $body;
+	protected $body = array();
 
 	/**
 	 * Data that can be used when building a query.
