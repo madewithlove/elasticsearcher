@@ -163,6 +163,8 @@ class MoviesYouMightLikeQuery extends QueryAbstract
 					'released_at' => 'desc'
 			)
 		);
+
+		$this->setBody($body);
 	}
 }
 ```
