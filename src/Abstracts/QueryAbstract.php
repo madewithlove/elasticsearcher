@@ -137,9 +137,29 @@ abstract class QueryAbstract
 
 		$query['index'] = empty($this->indices) ? '_all' : implode(',', array_values($this->indices));
 		$query['type']  = empty($this->types) ? '_all' : implode(',', array_values($this->types));
-		$query['body']  = $this->body;
+		$query['body']  = $this->parseAbstracts($this->body);
 
 		return $query;
+	}
+
+	/**
+	 * Traverses the body and checks if there are any abstracts (filters, queries) to be replaced with their
+	 * body.
+	 *
+	 * @param array $body
+	 *
+	 * @return array
+	 */
+	protected function parseAbstracts(array $body)
+	{
+		// Replace all abstracts with their body.
+		array_walk_recursive($body, function (&$item, $key) {
+			if ($item instanceof FilterAbstract) {
+				$item = $item->getBody();
+			}
+		});
+
+		return $body;
 	}
 
 	/**
