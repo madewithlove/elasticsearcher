@@ -29,6 +29,7 @@ $searcher = new ElasticSearcher($env);
 * [Index management](./docs/index-management.md)
 * [Document management](./docs/document-management.md)
 * [Query building (search)](./docs/query-building.md)
+* [Result parsing (after search)](./docs/result-parsing.md)
 
 ## Accessing the client
 
