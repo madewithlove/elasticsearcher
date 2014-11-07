@@ -3,6 +3,7 @@
 namespace ElasticSearcher\Abstracts;
 
 use ElasticSearcher\ElasticSearcher;
+use ElasticSearcher\ResultParsers\ArrayResultParser;
 
 /**
  * Base class for queries.
@@ -43,6 +44,11 @@ abstract class QueryAbstract
 	protected $data = array();
 
 	/**
+	 * @var ResultParserAbstract
+	 */
+	protected $resultParser;
+
+	/**
 	 * Prepare the query. Add filters, sorting, ....
 	 */
 	abstract protected function setup();
@@ -53,6 +59,9 @@ abstract class QueryAbstract
 	public function __construct(ElasticSearcher $searcher)
 	{
 		$this->searcher = $searcher;
+
+		// Default result parser.
+		$this->parseResultsWith(new ArrayResultParser());
 	}
 
 	/**
@@ -169,16 +178,39 @@ abstract class QueryAbstract
 	}
 
 	/**
+	 * @return mixed
+	 */
+	protected function getResultParser()
+	{
+		return $this->resultParser;
+	}
+
+	/**
+	 * @param ResultParserAbstract $resultParser
+	 */
+	public function parseResultsWith(ResultParserAbstract $resultParser)
+	{
+		$this->resultParser = $resultParser;
+	}
+
+	/**
 	 * Build and execute the query.
 	 *
-	 * @return array
+	 * @return ResultParserAbstract
 	 */
-	public function getResults()
+	public function run()
 	{
 		$this->setup();
 
 		$query = $this->buildQuery();
 
-		return $this->searcher->getClient()->search($query);
+		// Execute the query.
+		$rawResults = $this->searcher->getClient()->search($query);
+
+		// Pass response to the class that will do something with it.
+		$resultParser = $this->getResultParser();
+		$resultParser->setRawResults($rawResults);
+
+		return $resultParser;
 	}
 }

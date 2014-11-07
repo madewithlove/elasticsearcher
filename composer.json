@@ -9,6 +9,7 @@
 		}
 	},
 	"require": {
-		"elasticsearch/elasticsearch": "1.2.*"
+		"elasticsearch/elasticsearch": "~1.2",
+		"illuminate/support": "~4.2"
 	}
 }
