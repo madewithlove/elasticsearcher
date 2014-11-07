@@ -3,6 +3,7 @@
 require '../vendor/autoload.php';
 require 'Indexes/MoviesIndex.php';
 require 'Queries/MoviesFrom2014Query.php';
+require 'Queries/MoviesFromXYearQuery.php';
 
 use ElasticSearcher\Environment;
 use ElasticSearcher\ElasticSearcher;
