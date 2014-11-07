@@ -24,6 +24,8 @@ $env = new Environment(
 $searcher = new ElasticSearcher($env);
 ```
 
+More usage in the [examples](./examples) and documentation.
+
 # Documentation
 
 * [Index management](./docs/index-management.md)
