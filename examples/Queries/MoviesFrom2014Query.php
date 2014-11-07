@@ -13,17 +13,12 @@ class MoviesFrom2014Query extends QueryAbstract
 			'query' => array(
 				'filtered' => array(
 					'filter' => array(
-						$this->parseYear()
+						new TermFilter('year', 2014)
 					)
 				)
 			)
 		);
 
 		$this->setBody($body);
-	}
-
-	public function parseYear()
-	{
-		return new TermFilter('year', 2014);
 	}
 }
