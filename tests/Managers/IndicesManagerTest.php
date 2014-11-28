@@ -1,28 +1,14 @@
 <?php
 
-use ElasticSearcher\Managers\IndicesManager;
-
-class IndicesManagerTest extends PHPUnit_Framework_TestCase
+class IndicesManagerTest extends ElasticSearcherTestCase
 {
 	public function testRegister()
 	{
-		$environment     = $this->getMock('ElasticSearcher\Environment', null, [['hosts' => ['non-working-test:9200']]]);
-		$elasticSearcher = $this->getMock('ElasticSearcher\ElasticSearcher', null, [$environment]);
+		$indicesManager = $this->getElasticSearcher()->indicesManager();
 
-		$manager = new IndicesManager($elasticSearcher);
+		$moviesIndex = new MoviesIndex();
+		$indicesManager->register($moviesIndex);
 
-		$moviesIndex = $this->getMockForAbstractClass('ElasticSearcher\Abstracts\IndexAbstract');
-		$moviesIndex
-			->expects($this->any())
-			->method('getName')
-			->willReturn('movies');
-		$moviesIndex
-			->expects($this->any())
-			->method('getTypes')
-			->willReturn([]);
-		$manager->register($moviesIndex);
-
-		$this->assertEquals(true, $manager->isRegistered('movies'));
-		$this->assertEquals(true, $manager->isRegistered('movies'));
+		$this->assertEquals(true, $indicesManager->isRegistered('movies'));
 	}
 }
