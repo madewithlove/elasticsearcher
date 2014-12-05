@@ -58,4 +58,26 @@ class QueryTest extends ElasticSearcherTestCase
 		];
 		$this->assertEquals($expectedQuery, $query->getRawQuery());
 	}
+
+	public function testQueryBuildingWithData()
+	{
+		$query = new MoviesFromXYearQuery($this->getElasticSearcher());
+		$query->addData(['year' => 2013]);
+		$query->run(); // Needed because this calls setUp inside the query.
+
+		$expectedQuery = [
+			'index' => 'movies',
+			'type'  => 'movies',
+			'body'  => [
+				'query' => [
+					'filtered' => [
+						'filter' => [
+							['term' => ['year' => 2013]]
+						]
+					]
+				]
+			]
+		];
+		$this->assertEquals($expectedQuery, $query->getRawQuery());
+	}
 }
