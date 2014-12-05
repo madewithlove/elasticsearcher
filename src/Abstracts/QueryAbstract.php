@@ -180,9 +180,40 @@ abstract class QueryAbstract
 	/**
 	 * @return mixed
 	 */
-	protected function getResultParser()
+	public function getResultParser()
 	{
 		return $this->resultParser;
+	}
+
+	/**
+	 * Indices we are searching in.
+	 *
+	 * @return array
+	 */
+	public function getIndices()
+	{
+		return $this->indices;
+	}
+
+	/**
+	 * Types we are searching in.
+	 *
+	 * @return array
+	 */
+	public function getTypes()
+	{
+		return $this->types;
+	}
+
+	/**
+	 * Get the query after being build.
+	 * This is what will be sent to the elasticsearch SDK.
+	 *
+	 * @return array
+	 */
+	public function getRawQuery()
+	{
+		return $this->buildQuery();
 	}
 
 	/**
