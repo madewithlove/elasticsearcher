@@ -1,35 +1,27 @@
 <?php
 
+use ElasticSearcher\Managers\IndicesManager;
+
 class IndicesManagerTest extends ElasticSearcherTestCase
 {
-	/**
-	 * @var IndicesManager
-	 */
-	private $indicesManager;
-
-	public function setUp()
-	{
-		parent::setUp();
-		$this->indicesManager = $this->getElasticSearcher()->indicesManager();
-	}
-
 	public function testRegister()
 	{
-		$moviesIndex = new MoviesIndex();
+		$indicesManager = new IndicesManager($this->getElasticSearcher());
+		$moviesIndex    = new MoviesIndex();
 
 		// Single registration.
-		$this->indicesManager->register($moviesIndex);
-		$this->assertEquals(true, $this->indicesManager->isRegistered('movies'));
-		$this->assertArrayHasKey('movies', $this->indicesManager->registeredIndices());
-		$this->assertInstanceOf(MoviesIndex::class, $this->indicesManager->getRegistered('movies'));
+		$indicesManager->register($moviesIndex);
+		$this->assertEquals(true, $indicesManager->isRegistered('movies'));
+		$this->assertArrayHasKey('movies', $indicesManager->registeredIndices());
+		$this->assertInstanceOf(MoviesIndex::class, $indicesManager->getRegistered('movies'));
 
 		// Removing from register.
-		$this->indicesManager->unregister('movies');
-		$this->assertEquals(false, $this->indicesManager->isRegistered('movies'));
-		$this->assertArrayNotHasKey('movies', $this->indicesManager->registeredIndices());
+		$indicesManager->unregister('movies');
+		$this->assertEquals(false, $indicesManager->isRegistered('movies'));
+		$this->assertArrayNotHasKey('movies', $indicesManager->registeredIndices());
 
 		// Bulk registering.
-		$this->indicesManager->registerIndices([$moviesIndex]);
-		$this->assertEquals(true, $this->indicesManager->isRegistered('movies'));
+		$indicesManager->registerIndices([$moviesIndex]);
+		$this->assertEquals(true, $indicesManager->isRegistered('movies'));
 	}
 }
