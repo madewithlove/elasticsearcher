@@ -20,7 +20,7 @@ class ElasticSearcherTestCase extends PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$env      = new Environment(
-			['hosts' => ['localhost:9200']]
+			['hosts' => [ELASTICSEARCH_HOST]]
 		);
 		$this->elasticSearcher = new ElasticSearcher($env);
 	}
