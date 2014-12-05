@@ -65,4 +65,12 @@ class IndicesManagerTest extends ElasticSearcherTestCase
 		$expectedIndex = ['authors' => ['mappings' => array_only($authorsIndex->getTypes(), 'producers')]];
 		$this->assertEquals($expectedIndex, $this->indicesManager->getType('authors', 'producers'));
 	}
+
+	public function testDeleting()
+	{
+		$this->indicesManager->create('authors');
+		$this->indicesManager->delete('authors');
+
+		$this->assertFalse($this->indicesManager->exists('authors'));
+	}
 }
