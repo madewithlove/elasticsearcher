@@ -1,15 +1,12 @@
 <?php
 
-require '../vendor/autoload.php';
-require 'Indexes/MoviesIndex.php';
-require 'Queries/MoviesFrom2014Query.php';
-require 'Queries/MoviesFromXYearQuery.php';
+require '../tests/bootstrap.php';
 
 use ElasticSearcher\Environment;
 use ElasticSearcher\ElasticSearcher;
 
 $env      = new Environment(
-	['hosts' => ['localhost:9200']]
+	['hosts' => [ELASTICSEARCH_HOST]]
 );
 $searcher = new ElasticSearcher($env);
 
