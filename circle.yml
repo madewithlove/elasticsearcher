@@ -1,3 +1,9 @@
 machine:
   php:
     version: 5.5.2
+
+dependencies:
+  post:
+    - wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.1.tar.gz
+    - tar -xvf elasticsearch-1.4.1.tar.gz
+    - elasticsearch-1.4.1/bin/elasticsearch: {background: true}
