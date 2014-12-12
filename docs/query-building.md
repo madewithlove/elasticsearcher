@@ -97,9 +97,9 @@ $query->addData(['status' => 'active']);
 $results = $query->getResults();
 ```
 
-## Using buildin filters
+## Using abstract filters
 
-We have a set of buildin filters that build chunks of the body for you. If you have filters or body chunks that are
+We have a set of buildin abstract filters that build chunks of the body for you. If you have filters or body chunks that are
 repeated in multiple queries, you can create your own project filters, they only need to extend the `FilterAbstract` class.
 
 ```php
@@ -126,3 +126,6 @@ class MoviesYouMightLikeQuery extends QueryAbstract
   }
 }
 ```
+
+We encourage you to create your own application specific filters. For example: `BookingRangeFilter(date, date)`, `MovieIDFilter(int)`, ....
+As long as they extend `FilterAbstract` they can be used in queries.
