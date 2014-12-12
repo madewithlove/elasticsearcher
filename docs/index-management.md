@@ -77,7 +77,7 @@ $searcher->indexManager()->registeredIndices();
 // Indices that exist in the server, not linked to the registered indices.
 $searcher->indicesManager()->indices());
 $searcher->indicesManager()->get('suggestions'));
-$searcher->indicesManager()->getType('suggestions', 'amenities'));
+$searcher->indicesManager()->getType('suggestions', 'books'));
 
 // Other
 $searcher->indicesManager()->exists('listings');
