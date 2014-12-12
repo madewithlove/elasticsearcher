@@ -4,4 +4,4 @@ machine:
 
 dependencies:
   pre:
-    - ./install-elasticsearch.sh
+    - sh ./install-elasticsearch.sh
