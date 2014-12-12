@@ -263,24 +263,24 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v4.2.9",
+            "version": "v4.2.12",
             "target-dir": "Illuminate/Support",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "b6716d34afce6e69523725f2534a5c3a54dba964"
+                "reference": "888e81e77a675e4848d5b8375a9e68d1b9de3de9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/b6716d34afce6e69523725f2534a5c3a54dba964",
-                "reference": "b6716d34afce6e69523725f2534a5c3a54dba964",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/888e81e77a675e4848d5b8375a9e68d1b9de3de9",
+                "reference": "888e81e77a675e4848d5b8375a9e68d1b9de3de9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "jeremeamia/superclosure": "~1.0",
+                "jeremeamia/superclosure": "~1.0.1",
                 "patchwork/utf8": "1.1.*"
             },
             "type": "library",
@@ -307,7 +307,7 @@
                     "email": "taylorotwell@gmail.com"
                 }
             ],
-            "time": "2014-09-12 21:42:43"
+            "time": "2014-11-23 23:01:17"
         },
         {
             "name": "monolog/monolog",
