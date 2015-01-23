@@ -71,7 +71,7 @@ class ElasticSearcher
 	}
 
 	/**
-	 * @return IndexManager
+	 * @return IndicesManager
 	 */
 	public function indicesManager()
 	{
@@ -83,7 +83,7 @@ class ElasticSearcher
 	}
 
 	/**
-	 * @return DocumentManager
+	 * @return DocumentsManager
 	 */
 	public function documentsManager()
 	{
