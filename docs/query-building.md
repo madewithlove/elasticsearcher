@@ -25,7 +25,8 @@ Usage:
 
 ```php
 $query = new MoviesYouMightLikeQuery($searcher);
-$results = $query->getResults();
+$result = $query->run();
+var_dump($result->getResults());
 ```
 
 ## Body building
@@ -94,12 +95,13 @@ Usage:
 ```php
 $query = new MoviesYouMightLikeQuery($searcher);
 $query->addData(['status' => 'active']);
-$results = $query->getResults();
+$result = $query->run();
+var_dump($result->getResults());
 ```
 
 ## Using abstract filters
 
-We have a set of buildin abstract filters that build chunks of the body for you. If you have filters or body chunks that are
+We have a set of build in abstract filters that build chunks of the body for you. If you have filters or body chunks that are
 repeated in multiple queries, you can create your own project filters, they only need to extend the `FilterAbstract` class.
 
 ```php
