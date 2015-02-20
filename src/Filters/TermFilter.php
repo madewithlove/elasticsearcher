@@ -2,7 +2,7 @@
 
 namespace ElasticSearcher\Filters;
 
-use ElasticSearcher\Abstracts\FilterAbstract;
+use ElasticSearcher\Abstracts\AbstractFilter;
 
 /**
  * Simple term filter.
@@ -10,7 +10,7 @@ use ElasticSearcher\Abstracts\FilterAbstract;
  * @see http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-term-filter.html
  * @package ElasticSearcher\Filters
  */
-class TermFilter extends FilterAbstract
+class TermFilter extends AbstractFilter
 {
 	/**
 	 * @param string $field

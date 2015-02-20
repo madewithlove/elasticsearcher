@@ -5,7 +5,7 @@ namespace ElasticSearcher\Abstracts;
 /**
  * Base class for filters.
  */
-abstract class FilterAbstract
+abstract class AbstractFilter
 {
 	/**
 	 * Body of the filter to be executed. Should be the array as if you would pass it

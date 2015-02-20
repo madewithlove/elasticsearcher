@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 /**
  * Base class for result parsing.
  */
-abstract class ResultParserAbstract
+abstract class AbstractResultParser
 {
 	/**
 	 * @var array

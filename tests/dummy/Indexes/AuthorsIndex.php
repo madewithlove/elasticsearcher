@@ -1,8 +1,8 @@
 <?php
 
-use ElasticSearcher\Abstracts\IndexAbstract;
+use ElasticSearcher\Abstracts\AbstractIndex;
 
-class AuthorsIndex extends IndexAbstract
+class AuthorsIndex extends AbstractIndex
 {
 	public function getName()
 	{

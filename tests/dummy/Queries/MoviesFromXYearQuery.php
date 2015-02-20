@@ -1,9 +1,9 @@
 <?php
 
-use ElasticSearcher\Abstracts\QueryAbstract;
+use ElasticSearcher\Abstracts\AbstractQuery;
 use ElasticSearcher\Filters\TermFilter;
 
-class MoviesFromXYearQuery extends QueryAbstract
+class MoviesFromXYearQuery extends AbstractQuery
 {
 	public function setup()
 	{
