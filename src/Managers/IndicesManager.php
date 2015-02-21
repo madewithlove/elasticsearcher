@@ -23,7 +23,7 @@ class IndicesManager extends AbstractManager
 	/**
 	 * @return AbstractIndex
 	 *
-*@param AbstractIndex $index
+	 * @param AbstractIndex $index
 	 */
 	public function register(AbstractIndex $index)
 	{
@@ -44,9 +44,8 @@ class IndicesManager extends AbstractManager
 
 	/**
 	 * @return AbstractIndex
-
 	 *
-*@param string $indexName
+	 * @param string $indexName
 	 */
 	public function unregister($indexName)
 	{
@@ -76,13 +75,11 @@ class IndicesManager extends AbstractManager
 	/**
 	 * Get a registered index. When not found it will throw an exception.
 	 * If you do not want the exception being thrown, use getRegistered first.
-
 	 *
-*@return AbstractIndex
+	 * @return AbstractIndex
 	 * @throws Exception
-
 	 *
-*@param string $indexName
+	 * @param string $indexName
 	 */
 	public function getRegistered($indexName)
 	{

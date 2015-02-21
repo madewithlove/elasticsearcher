@@ -7,7 +7,7 @@ use ElasticSearcher\Abstracts\AbstractFilter;
 /**
  * Simple term filter.
  *
- * @see http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-term-filter.html
+ * @see     http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-term-filter.html
  * @package ElasticSearcher\Filters
  */
 class TermFilter extends AbstractFilter

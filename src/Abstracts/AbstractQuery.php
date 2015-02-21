@@ -226,9 +226,8 @@ abstract class AbstractQuery
 
 	/**
 	 * Build and execute the query.
-
 	 *
-*@return AbstractResultParser
+	 * @return AbstractResultParser
 	 */
 	public function run()
 	{
