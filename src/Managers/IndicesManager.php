@@ -2,15 +2,15 @@
 
 namespace ElasticSearcher\Managers;
 
-use ElasticSearcher\Abstracts\IndexAbstract;
-use ElasticSearcher\Abstracts\ManagerAbstract;
+use ElasticSearcher\Abstracts\AbstractIndex;
+use ElasticSearcher\Abstracts\AbstractManager;
 use Exception;
 
 /**
  * Manager for everything index related. Holds a container for
  * used indexes. Also holds basic CRUD operations on those indexes.
  */
-class IndicesManager extends ManagerAbstract
+class IndicesManager extends AbstractManager
 {
 	/**
 	 * @var array
@@ -21,11 +21,11 @@ class IndicesManager extends ManagerAbstract
 	// Registered indices.
 	// ----------------------------------------
 	/**
-	 * @return IndexAbstract
+	 * @return AbstractIndex
 	 *
-	 * @param IndexAbstract $index
+	 * @param AbstractIndex $index
 	 */
-	public function register(IndexAbstract $index)
+	public function register(AbstractIndex $index)
 	{
 		$this->indices[$index->getName()] = $index;
 
@@ -43,7 +43,7 @@ class IndicesManager extends ManagerAbstract
 	}
 
 	/**
-	 * @return IndexAbstract
+	 * @return AbstractIndex
 	 *
 	 * @param string $indexName
 	 */
@@ -76,7 +76,7 @@ class IndicesManager extends ManagerAbstract
 	 * Get a registered index. When not found it will throw an exception.
 	 * If you do not want the exception being thrown, use getRegistered first.
 	 *
-	 * @return IndexAbstract
+	 * @return AbstractIndex
 	 * @throws Exception
 	 *
 	 * @param string $indexName

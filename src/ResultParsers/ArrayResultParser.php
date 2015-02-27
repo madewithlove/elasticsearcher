@@ -2,12 +2,12 @@
 
 namespace ElasticSearcher\ResultParsers;
 
-use ElasticSearcher\Abstracts\ResultParserAbstract;
+use ElasticSearcher\Abstracts\AbstractResultParser;
 
 /**
  * @package ElasticSearcher\ResultParsers
  */
-class ArrayResultParser extends ResultParserAbstract
+class ArrayResultParser extends AbstractResultParser
 {
 	public function getResults()
 	{

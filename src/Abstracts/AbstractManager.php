@@ -7,7 +7,7 @@ use ElasticSearcher\ElasticSearcher;
 /**
  * Base class for managers.
  */
-abstract class ManagerAbstract
+abstract class AbstractManager
 {
 	/**
 	 * @var ElasticSearcher

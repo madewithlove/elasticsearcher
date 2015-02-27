@@ -8,7 +8,7 @@ use ElasticSearcher\ResultParsers\ArrayResultParser;
 /**
  * Base class for queries.
  */
-abstract class QueryAbstract
+abstract class AbstractQuery
 {
 	/**
 	 * @var ElasticSearcher
@@ -44,7 +44,7 @@ abstract class QueryAbstract
 	protected $data = array();
 
 	/**
-	 * @var ResultParserAbstract
+	 * @var AbstractResultParser
 	 */
 	protected $resultParser;
 
@@ -169,7 +169,7 @@ abstract class QueryAbstract
 	{
 		// Replace all abstracts with their body.
 		array_walk_recursive($body, function (&$item, $key) {
-			if ($item instanceof FilterAbstract) {
+			if ($item instanceof AbstractFilter) {
 				$item = $item->getBody();
 			}
 		});
@@ -217,9 +217,9 @@ abstract class QueryAbstract
 	}
 
 	/**
-	 * @param ResultParserAbstract $resultParser
+	 * @param AbstractResultParser $resultParser
 	 */
-	public function parseResultsWith(ResultParserAbstract $resultParser)
+	public function parseResultsWith(AbstractResultParser $resultParser)
 	{
 		$this->resultParser = $resultParser;
 	}
@@ -227,7 +227,7 @@ abstract class QueryAbstract
 	/**
 	 * Build and execute the query.
 	 *
-	 * @return ResultParserAbstract
+	 * @return AbstractResultParser
 	 */
 	public function run()
 	{

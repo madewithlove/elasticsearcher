@@ -2,19 +2,19 @@
 
 namespace ElasticSearcher\Filters;
 
-use ElasticSearcher\Abstracts\FilterAbstract;
+use ElasticSearcher\Abstracts\AbstractFilter;
 
 /**
  * Simple terms filter.
  *
- * @see http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-terms-filter.html
+ * @see     http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-terms-filter.html
  * @package ElasticSearcher\Filters
  */
-class TermsFilter extends FilterAbstract
+class TermsFilter extends AbstractFilter
 {
 	/**
 	 * @param string $field
-	 * @param array $values
+	 * @param array  $values
 	 */
 	public function __construct($field, array $values)
 	{

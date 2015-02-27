@@ -5,7 +5,7 @@ namespace ElasticSearcher\Abstracts;
 /**
  * Base class for indexes.
  */
-abstract class IndexAbstract
+abstract class AbstractIndex
 {
 	/**
 	 * @return string

@@ -1,8 +1,8 @@
 <?php
 
-use ElasticSearcher\Abstracts\IndexAbstract;
+use ElasticSearcher\Abstracts\AbstractIndex;
 
-class MoviesIndex extends IndexAbstract
+class MoviesIndex extends AbstractIndex
 {
 	public function getName()
 	{

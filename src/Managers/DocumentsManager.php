@@ -2,12 +2,12 @@
 
 namespace ElasticSearcher\Managers;
 
-use ElasticSearcher\Abstracts\ManagerAbstract;
+use ElasticSearcher\Abstracts\AbstractManager;
 
 /**
  * Manager for everything document related. Holds basic CRUD operations on documents.
  */
-class DocumentsManager extends ManagerAbstract
+class DocumentsManager extends AbstractManager
 {
 	/**
 	 * Create a document.
