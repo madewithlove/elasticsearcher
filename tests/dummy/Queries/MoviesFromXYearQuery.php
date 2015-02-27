@@ -1,7 +1,7 @@
 <?php
 
 use ElasticSearcher\Abstracts\AbstractQuery;
-use ElasticSearcher\Filters\TermFilter;
+use ElasticSearcher\Fragments\Filters\TermFilter;
 
 class MoviesFromXYearQuery extends AbstractQuery
 {

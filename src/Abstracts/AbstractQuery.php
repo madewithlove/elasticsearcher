@@ -169,7 +169,7 @@ abstract class AbstractQuery
 	{
 		// Replace all abstracts with their body.
 		array_walk_recursive($body, function (&$item, $key) {
-			if ($item instanceof AbstractFilter) {
+			if ($item instanceof AbstractFragment) {
 				$item = $item->getBody();
 			}
 		});
