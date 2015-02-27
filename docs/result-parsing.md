@@ -6,12 +6,12 @@ models via your ORM, this is the place to be.
 
 ## Creating a parser
 
-Create a class that extends `ResultParserAbstract` and implement `getResults()`. Thats about it.
+Create a class that extends `ElasticSearcher\Abstracts\AbstractResultParser` and implement `getResults()`. Thats about it.
 
 ```php
-use ElasticSearcher\Abstracts\ResultParserAbstract;
+use ElasticSearcher\Abstracts\AbstractResultParser;
 
-class MoviesResultParser extends ResultParserAbstract
+class MoviesResultParser extends AbstractResultParser
 {
 	public function getResults()
 	{
@@ -37,9 +37,9 @@ $this->get('aggregations.size.buckets.key');
 Inside the setup of your Query, you can pass an instance of your custom parser.
 
 ```php
-use ElasticSearcher\Abstracts\QueryAbstract;
+use ElasticSearcher\Abstracts\AbstractQuery;
 
-class MoviesYouMightLikeQuery extends QueryAbstract
+class MoviesYouMightLikeQuery extends AbstractQuery
 {
   public function setup()
   {

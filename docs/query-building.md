@@ -1,8 +1,8 @@
 # Query building
 
-You can build a query by extending the `QueryAbstract` class, which will provide some tools to make it easier to build
-a query. You are not required to use the tools, you can still set a "raw" query using arrays like the ElasticSearch SDK
-offers.
+You can build a query by extending the `ElasticSearcher\Abstracts\AbstractQuery` class, which will provide some tools to
+make it easier to build a query. You are not required to use the tools, you can still set a "raw" query using arrays
+like the ElasticSearch SDK offers.
 
 ## Minimum query
 
@@ -10,9 +10,9 @@ This basic example will return all documents in the `movies` type in the `sugges
 would result in all documents inside the `suggestions` index would be returned.
 
 ```php
-use ElasticSearcher\Abstracts\QueryAbstract;
+use ElasticSearcher\Abstracts\AbstractQuery;
 
-class MoviesYouMightLikeQuery extends QueryAbstract
+class MoviesYouMightLikeQuery extends AbstractQuery
 {
   public function setup()
   {
@@ -65,9 +65,9 @@ class MoviesYouMightLikeQuery extends QueryAbstract
 Using external data to manipulate your query:
 
 ```php
-use ElasticSearcher\Abstracts\QueryAbstract;
+use ElasticSearcher\Abstracts\AbstractQuery;
 
-class MoviesYouMightLikeQuery extends QueryAbstract
+class MoviesYouMightLikeQuery extends AbstractQuery
 {
   public function setup()
   {
@@ -99,16 +99,17 @@ $result = $query->run();
 var_dump($result->getResults());
 ```
 
-## Using abstract filters
+## Using abstract fragments
 
-We have a set of build in abstract filters that build chunks of the body for you. If you have filters or body chunks that are
-repeated in multiple queries, you can create your own project filters, they only need to extend the `FilterAbstract` class.
+We have a set of build in abstract fragments (filters, queries, aggregations, ...) that build chunks of the body for you.
+If you have body fragements that are repeated in multiple queries, you can create your own project fragments, they only
+need to extend the `ElasticSearcher\Abstracts\AbstractFragment` class.
 
 ```php
-use ElasticSearcher\Abstracts\QueryAbstract;
-use ElasticSearcher\Filters\TermFilter;
+use ElasticSearcher\Abstracts\AbstractQuery;
+use ElasticSearcher\Fragments\Filters\TermFilter;
 
-class MoviesYouMightLikeQuery extends QueryAbstract
+class MoviesYouMightLikeQuery extends AbstractQuery
 {
   public function setup()
   {
@@ -130,4 +131,4 @@ class MoviesYouMightLikeQuery extends QueryAbstract
 ```
 
 We encourage you to create your own application specific filters. For example: `BookingRangeFilter(date, date)`, `MovieIDFilter(int)`, ....
-As long as they extend `FilterAbstract` they can be used in queries.
+As long as they extend `ElasticSearcher\Abstracts\AbstractFragment` they can be used in queries.

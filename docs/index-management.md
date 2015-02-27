@@ -13,7 +13,7 @@ A simple [index](http://www.elasticsearch.org/guide/en/elasticsearch/reference/c
 out of a name and one or more types (+mappings). This can be created as:
 
 ```php
-class SuggestionsIndex extends \ElasticSearcher\Abstracts\IndexAbstract
+class SuggestionsIndex extends \ElasticSearcher\Abstracts\AbstractIndex
 {
   public function getName()
   {
