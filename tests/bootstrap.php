@@ -6,6 +6,8 @@ require __DIR__.'/dummy/Indexes/MoviesIndex.php';
 require __DIR__.'/dummy/Indexes/AuthorsIndex.php';
 require __DIR__.'/dummy/Queries/MoviesFrom2014Query.php';
 require __DIR__.'/dummy/Queries/MoviesFromXYearQuery.php';
+require __DIR__.'/dummy/Queries/MovieWithIDXQuery.php';
+require __DIR__.'/dummy/Fragments/Filters/IDFilter.php';
 
 // Test host (should be inside the vagrant box).
 define('ELASTICSEARCH_HOST', 'localhost:9200');

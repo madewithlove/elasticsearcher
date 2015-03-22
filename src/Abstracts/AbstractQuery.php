@@ -167,12 +167,20 @@ abstract class AbstractQuery
 	 */
 	protected function parseAbstracts(array $body)
 	{
+		// Have we parsed something, we'll recursively keep parsing until this stays false.
+		$parsed = false;
+
 		// Replace all abstracts with their body.
-		array_walk_recursive($body, function (&$item, $key) {
+		array_walk_recursive($body, function (&$item) use (&$parsed) {
 			if ($item instanceof AbstractFragment) {
-				$item = $item->getBody();
+				$item   = $item->getBody();
+				$parsed = true;
 			}
 		});
+
+		if ($parsed) {
+			$body = $this->parseAbstracts($body);
+		}
 
 		return $body;
 	}

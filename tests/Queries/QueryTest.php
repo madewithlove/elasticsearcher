@@ -80,4 +80,26 @@ class QueryTest extends ElasticSearcherTestCase
 		];
 		$this->assertEquals($expectedQuery, $query->getRawQuery());
 	}
+
+	public function testQueryBuildingWithNestedFragments()
+	{
+		$query = new MovieWithIDXQuery($this->getElasticSearcher());
+		$query->addData(['id' => 1]);
+		$query->run(); // Needed because this calls setUp inside the query.
+
+		$expectedQuery = [
+			'index' => 'movies',
+			'type'  => 'movies',
+			'body'  => [
+				'query' => [
+					'filtered' => [
+						'filter' => [
+							['term' => ['id' => 1]]
+						]
+					]
+				]
+			]
+		];
+		$this->assertEquals($expectedQuery, $query->getRawQuery());
+	}
 }
