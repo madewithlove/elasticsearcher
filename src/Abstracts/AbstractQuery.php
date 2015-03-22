@@ -75,7 +75,7 @@ abstract class AbstractQuery
 	}
 
 	/**
-	 * @return array
+	 * @return mixed
 	 *
 	 * @param null|string
 	 */
