@@ -136,23 +136,12 @@ class DocumentsManager extends AbstractManager
 	}
 
 	/**
-	 * @param               $indexName
-	 * @param               $type
 	 * @param AbstractQuery $query
 	 *
 	 * @return array
-	 * @throws \Exception
 	 */
-	public function deleteByQuery($indexName, $type, AbstractQuery $query)
+	public function deleteByQuery(AbstractQuery $query)
 	{
-		$index = $this->elasticSearcher->indicesManager()->getRegistered($indexName);
-
-		$params = [
-			'index' => $index->getName(),
-			'type'  => $type,
-			'body'  => $query->getRawQuery()['body'],
-		];
-
-		return $this->elasticSearcher->getClient()->deleteByQuery($params);
+		return $this->elasticSearcher->getClient()->deleteByQuery($query->getRawQuery());
 	}
 }
