@@ -3,6 +3,7 @@
 namespace ElasticSearcher\Managers;
 
 use ElasticSearcher\Abstracts\AbstractManager;
+use ElasticSearcher\Abstracts\AbstractQuery;
 
 /**
  * Manager for everything document related. Holds basic CRUD operations on documents.
@@ -132,5 +133,15 @@ class DocumentsManager extends AbstractManager
 		];
 
 		return $this->elasticSearcher->getClient()->get($params);
+	}
+
+	/**
+	 * @param AbstractQuery $query
+	 *
+	 * @return array
+	 */
+	public function deleteByQuery(AbstractQuery $query)
+	{
+		return $this->elasticSearcher->getClient()->deleteByQuery($query->getRawQuery());
 	}
 }
