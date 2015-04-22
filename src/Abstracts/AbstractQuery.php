@@ -142,6 +142,8 @@ abstract class AbstractQuery
 	 */
 	protected function buildQuery()
 	{
+		$this->setup();
+
 		$query = array();
 
 		// Index always needs to be provided. _all means a cross index search.
@@ -239,8 +241,6 @@ abstract class AbstractQuery
 	 */
 	public function run()
 	{
-		$this->setup();
-
 		$query = $this->buildQuery();
 
 		// Execute the query.
