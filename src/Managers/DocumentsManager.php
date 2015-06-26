@@ -116,6 +116,25 @@ class DocumentsManager extends AbstractManager
 	}
 
 	/**
+	 * Update a document. Create it if it doesn't exist.
+	 *
+	 * @return array
+	 *
+	 * @param string $indexName
+	 * @param string $type
+	 * @param string $id
+	 * @param array $data
+	 */
+	public function updateOrIndex($indexName, $type, $id, array $data)
+	{
+		if ($this->exists($indexName, $type, $id)) {
+			return $this->update($indexName, $type, $id, $data);
+		} else {
+			return $this->index($indexName, $type, $data);
+		}
+	}
+
+	/**
 	 * @return array
 	 *
 	 * @param string $indexName

@@ -117,6 +117,7 @@ $searcher->indicesManager()->deleteType('suggestions', 'movies');
 $manager->index('suggestions', 'movies', $data);
 $manager->bulkIndex('suggestions', 'movies', [$data, $data, $data]);
 $manager->update('suggestions', 'movies', 123, ['name' => 'Fight Club 2014']);
+$manager->updateOrIndex('suggestions', 'movies', 123, ['name' => 'Fight Club 2014']);
 $manager->delete('suggestions', 'movies', 123);
 $manager->exists('suggestions', 'movies', 123);
 $manager->get('suggestions', 'movies', 123);
