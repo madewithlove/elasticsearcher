@@ -161,21 +161,10 @@ abstract class AbstractQuery
 			$query['type'] = implode(',', array_values($this->types));
 		}
 
-		$query['body'] = $this->parseFragments($this->body);
+		// Replace Fragments with their raw body.
+		$query['body'] = $this->fragmentParser->parse($this->body);
 
 		return $query;
-	}
-
-	/**
-	 * Replace fragments with their body.
-	 *
-	 * @param array $body
-	 *
-	 * @return array
-	 */
-	protected function parseFragments(array $body)
-	{
-		return $this->fragmentParser->parse($body);
 	}
 
 	/**
