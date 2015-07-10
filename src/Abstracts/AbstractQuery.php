@@ -3,7 +3,8 @@
 namespace ElasticSearcher\Abstracts;
 
 use ElasticSearcher\ElasticSearcher;
-use ElasticSearcher\ResultParsers\ArrayResultParser;
+use ElasticSearcher\Parsers\ArrayResultParser;
+use ElasticSearcher\Parsers\FragmentParser;
 
 /**
  * Base class for queries.
@@ -49,6 +50,11 @@ abstract class AbstractQuery
 	protected $resultParser;
 
 	/**
+	 * @var FragmentParser
+	 */
+	protected $fragmentParser;
+
+	/**
 	 * Prepare the query. Add filters, sorting, ....
 	 */
 	abstract protected function setup();
@@ -62,6 +68,7 @@ abstract class AbstractQuery
 
 		// Default result parser.
 		$this->parseResultsWith(new ArrayResultParser());
+		$this->fragmentParser = new FragmentParser();
 	}
 
 	/**
@@ -91,7 +98,7 @@ abstract class AbstractQuery
 	/**
 	 * Search in an index and/or type.
 	 *
-	 * @param string      $index
+	 * @param string $index
 	 * @param null|string $type
 	 */
 	protected function searchIn($index, $type = null)
@@ -154,37 +161,10 @@ abstract class AbstractQuery
 			$query['type'] = implode(',', array_values($this->types));
 		}
 
-		$query['body'] = $this->parseAbstracts($this->body);
+		// Replace Fragments with their raw body.
+		$query['body'] = $this->fragmentParser->parse($this->body);
 
 		return $query;
-	}
-
-	/**
-	 * Traverses the body and checks if there are any abstracts (filters, queries) to be replaced with their
-	 * body.
-	 *
-	 * @param array $body
-	 *
-	 * @return array
-	 */
-	protected function parseAbstracts(array $body)
-	{
-		// Have we parsed something, we'll recursively keep parsing until this stays false.
-		$parsed = false;
-
-		// Replace all abstracts with their body.
-		array_walk_recursive($body, function (&$item) use (&$parsed) {
-			if ($item instanceof AbstractFragment) {
-				$item   = $item->getBody();
-				$parsed = true;
-			}
-		});
-
-		if ($parsed) {
-			$body = $this->parseAbstracts($body);
-		}
-
-		return $body;
 	}
 
 	/**
