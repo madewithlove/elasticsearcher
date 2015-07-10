@@ -3,7 +3,7 @@
 namespace ElasticSearcher\Abstracts;
 
 use ElasticSearcher\ElasticSearcher;
-use ElasticSearcher\ResultParsers\ArrayResultParser;
+use ElasticSearcher\Parsers\ArrayResultParser;
 
 /**
  * Base class for queries.

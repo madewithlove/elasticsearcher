@@ -1,11 +1,11 @@
 <?php
 
-namespace ElasticSearcher\ResultParsers;
+namespace ElasticSearcher\Parsers;
 
 use ElasticSearcher\Abstracts\AbstractResultParser;
 
 /**
- * @package ElasticSearcher\ResultParsers
+ * @package ElasticSearcher\Parsers
  */
 class ArrayResultParser extends AbstractResultParser
 {
