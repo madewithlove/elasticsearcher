@@ -102,4 +102,21 @@ class QueryTest extends ElasticSearcherTestCase
 		];
 		$this->assertEquals($expectedQuery, $query->getRawQuery());
 	}
+
+	public function testSettingIndicesAndTypes()
+	{
+		$query = $this->getMockForAbstractClass('\ElasticSearcher\Abstracts\AbstractQuery', [$this->getElasticSearcher()]);
+
+		$query->searchIn('movies');
+		$this->assertEquals(['movies'], $query->getIndices());
+		$this->assertEquals([], $query->getTypes());
+
+		$query->searchIn('movies', 'authors');
+		$this->assertEquals(['movies'], $query->getIndices());
+		$this->assertEquals(['authors'], $query->getTypes());
+
+		$query->searchIn(['movies'], ['authors', 'directors']);
+		$this->assertEquals(['movies'], $query->getIndices());
+		$this->assertEquals(['authors', 'directors'], $query->getTypes());
+	}
 }

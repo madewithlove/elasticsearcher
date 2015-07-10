@@ -21,28 +21,28 @@ abstract class AbstractQuery
 	 *
 	 * @var array
 	 */
-	protected $indices;
+	protected $indices = [];
 
 	/**
 	 * Types on which the query should be executed.
 	 *
 	 * @var array
 	 */
-	protected $types;
+	protected $types = [];
 
 	/**
 	 * Body of the query to execute.
 	 *
 	 * @var array
 	 */
-	protected $body = array();
+	protected $body = [];
 
 	/**
 	 * Data that can be used when building a query.
 	 *
 	 * @var array
 	 */
-	protected $data = array();
+	protected $data = [];
 
 	/**
 	 * @var AbstractResultParser
@@ -96,41 +96,49 @@ abstract class AbstractQuery
 	}
 
 	/**
-	 * Search in an index and/or type.
+	 * Define on which indices and types the query should be run.
 	 *
-	 * @param string $index
-	 * @param null|string $type
+	 * @param string|array $index
+	 * @param null|string|array $type
 	 */
-	protected function searchIn($index, $type = null)
+	public function searchIn($index, $type = null)
 	{
-		$this->searchInIndex($index);
+		// Reset the current state, in case the same instance is re-used.
+		$this->indices = [];
+		$this->types = [];
+
+		$this->searchInIndices((array) $index);
 
 		if ($type !== null) {
-			$this->searchInType($type);
+			$this->searchInTypes((array) $type);
 		}
 	}
 
 	/**
-	 * @param string $index
+	 * @param array $indices
 	 */
-	protected function searchInIndex($index)
+	protected function searchInIndices(array $indices)
 	{
-		$index = $this->searcher->indicesManager()->getRegistered($index);
+		foreach ($indices as $index) {
+			$index = $this->searcher->indicesManager()->getRegistered($index);
 
-		$this->indices[] = $index->getName();
+			$this->indices[] = $index->getName();
+		}
 
-		// Make sure we have no doubles.
+		// Remove doubles.
 		$this->indices = array_unique($this->indices);
 	}
 
 	/**
-	 * @param string $type
+	 * @param array $types
 	 */
-	protected function searchInType($type)
+	protected function searchInTypes(array $types)
 	{
-		$this->types[] = $type;
+		foreach ($types as $type) {
+			$this->types[] = $type;
+		}
 
-		// Make sure we have no doubles.
+		// Remove doubles.
 		$this->types = array_unique($this->types);
 	}
 
