@@ -2,11 +2,18 @@
 
 namespace ElasticSearcher\Abstracts;
 
+use ElasticSearcher\Parsers\FragmentParser;
+
 /**
  * Base class for indexes.
  */
 abstract class AbstractIndex
 {
+	/**
+	 * @var FragmentParser
+	 */
+	protected $fragmentParser;
+
 	/**
 	 * @return string
 	 */
@@ -18,13 +25,25 @@ abstract class AbstractIndex
 	abstract public function getTypes();
 
 	/**
+	 */
+	public function __construct()
+	{
+		$this->fragmentParser = new FragmentParser();
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getBody()
 	{
-		return [
+		$body = [
 			'mappings' => $this->getTypes()
 		];
+
+		// Replace fragments with their raw body.
+		$body = $this->fragmentParser->parse($body);
+
+		return $body;
 	}
 
 	/**
