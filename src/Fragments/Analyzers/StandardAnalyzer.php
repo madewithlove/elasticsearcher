@@ -13,6 +13,11 @@ use ElasticSearcher\Abstracts\AbstractFragment;
 class StandardAnalyzer extends AbstractFragment
 {
 	/**
+	 * @var bool
+	 */
+	public $mergeWithParent = true;
+
+	/**
 	 * @param string $name
 	 * @param null|array $stopwords
 	 * @param null|integer $maxTokenLength
