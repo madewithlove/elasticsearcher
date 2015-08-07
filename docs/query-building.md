@@ -99,36 +99,7 @@ $result = $query->run();
 var_dump($result->getResults());
 ```
 
-## Using abstract fragments
+## Using re-usable fragments
 
-We have a set of build in abstract fragments (filters, queries, aggregations, ...) that build chunks of the body for you.
-If you have body fragements that are repeated in multiple queries, you can create your own project fragments, they only
-need to extend the `ElasticSearcher\Abstracts\AbstractFragment` class.
-
-```php
-use ElasticSearcher\Abstracts\AbstractQuery;
-use ElasticSearcher\Fragments\Filters\TermFilter;
-
-class MoviesYouMightLikeQuery extends AbstractQuery
-{
-  public function setup()
-  {
-    $this->searchIn('suggestions', 'movies');
-
-     $body = array(
-      'query' => array(
-        'filtered' => array(
-          'filter' => array(
-            new TermFilter('status', 'active')
-          )
-        )
-      )
-     );
-
-     $this->setBody($body);
-  }
-}
-```
-
-We encourage you to create your own application specific filters. For example: `BookingRangeFilter(date, date)`, `MovieIDFilter(int)`, ....
-As long as they extend `ElasticSearcher\Abstracts\AbstractFragment` they can be used in queries.
+You can abstract parts of your query to separate classes and re-use them. More about it in the [re-useable fragments](re-useable-fragments.md)
+documentation.

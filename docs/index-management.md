@@ -48,6 +48,11 @@ class SuggestionsIndex extends \ElasticSearcher\Abstracts\AbstractIndex
 This the minimum required for defining an index. If you require more extensive configuration, override the `getBody`
 method.
 
+### Using re-useable fragments
+
+You can abstract parts of your index to separate classes and re-use them. More about it in the [re-useable fragments](re-useable-fragments.md)
+documentation.
+
 ## Index registration
 
 The indices should be registered with the indices manager for further use in the package. The index object is only
