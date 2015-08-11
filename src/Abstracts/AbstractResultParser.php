@@ -76,5 +76,5 @@ abstract class AbstractResultParser
 	 * Parse the raw results and convert to usable results.
 	 * This could for example fetch models in an ORM, based on the hits.
 	 */
-	abstract function getResults();
+	abstract public function getResults();
 }
