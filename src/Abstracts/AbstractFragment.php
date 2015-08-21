@@ -2,6 +2,8 @@
 
 namespace ElasticSearcher\Abstracts;
 
+use Illuminate\Support\Arr;
+
 /**
  * Base class for fragments that can be used in the body of requests to Elasticsearch.
  */
@@ -38,5 +40,20 @@ abstract class AbstractFragment
 	public function getBody()
 	{
 		return $this->body;
+	}
+
+	/**
+	 * Set a value in the body using the dotted notation.
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 *
+	 * @return $this
+	 */
+	public function set($key, $value)
+	{
+		Arr::set($this->body, $key, $value);
+
+		return $this;
 	}
 }
