@@ -113,4 +113,26 @@ class FragmentParserTest extends ElasticSearcherTestCase
 
 		$this->assertEquals($expectedBody, $parser->parse($body));
 	}
+
+	public function testParsingCustomFragments()
+	{
+		$parser = new FragmentParser();
+
+		$body = [
+			'query' => [
+				new IDFilter(123),
+			]
+		];
+		$expectedBody = [
+			'query' => [
+				[
+					'term' => [
+						'id' => 123
+					]
+				]
+			]
+		];
+
+		$this->assertEquals($expectedBody, $parser->parse($body));
+	}
 }
