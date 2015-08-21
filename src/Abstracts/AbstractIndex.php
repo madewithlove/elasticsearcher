@@ -37,13 +37,22 @@ abstract class AbstractIndex
 	public function getBody()
 	{
 		$body = [
-			'mappings' => $this->getTypes()
+			'settings' => $this->getSettings(),
+			'mappings' => $this->getTypes(),
 		];
 
 		// Replace fragments with their raw body.
 		$body = $this->fragmentParser->parse($body);
 
 		return $body;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getSettings()
+	{
+		return null;
 	}
 
 	/**
