@@ -49,7 +49,7 @@ $query->run();
 
 ### Query with custom/re-usable fragments
 
-Move re-occuring or complex fragments of your query to a separate class.
+Move re-occuring or complex fragments of your query or index to a separate class.
 
 ```php
 class MoviesFrom2014Query extends AbstractQuery
@@ -76,7 +76,7 @@ class MoviesFrom2014Query extends AbstractQuery
 ### Query with custom result parsing
 
 Perform actions on the response from Elasticsearch before the Query returns the results. It can be used for converting
-the Elasticsearch documents into models/entities from your ORM. Re-use it multiple queries.
+the Elasticsearch documents into models/entities from your ORM. Re-use it in multiple queries.
 
 ```php
 class MoviesFrom2014Query extends AbstractQuery
@@ -152,3 +152,4 @@ More usage in the [examples](./examples) and documentation.
 * [Document management](./docs/document-management.md)
 * [Query building (search)](./docs/query-building.md)
 * [Result parsing (after search)](./docs/result-parsing.md)
+* [Re-useable fragments](./docs/re-useable-fragments.md)

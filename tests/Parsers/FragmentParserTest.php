@@ -2,6 +2,7 @@
 
 use ElasticSearcher\Parsers\FragmentParser;
 use ElasticSearcher\Fragments\Filters\TermFilter;
+use ElasticSearcher\Fragments\Analyzers\StandardAnalyzer;
 
 class FragmentParserTest extends ElasticSearcherTestCase
 {
@@ -86,6 +87,26 @@ class FragmentParserTest extends ElasticSearcherTestCase
 							]
 						],
 					]
+				]
+			]
+		];
+
+		$this->assertEquals($expectedBody, $parser->parse($body));
+	}
+
+	public function testParsingAndMergingWithParent()
+	{
+		$parser = new FragmentParser();
+
+		$body = [
+			'settings' => [
+				new StandardAnalyzer('myAnalyzer')
+			]
+		];
+		$expectedBody = [
+			'settings' => [
+				'myAnalyzer' => [
+					'type' => 'standard'
 				]
 			]
 		];
