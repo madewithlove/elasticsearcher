@@ -1,7 +1,7 @@
 # Index Management
 
 The package includes an indices manager. You are required to register indices that you'll using, whether its for
-CRUD on the indices or for quering. The index manager is accessed via:
+CRUD on the indices or for querying. The index manager is accessed via:
 
 ```php
 $manager = $searcher->indicesManager();
@@ -20,33 +20,28 @@ class SuggestionsIndex extends \ElasticSearcher\Abstracts\AbstractIndex
     return 'suggestions';
   }
 
-  public function getTypes()
+  public function setup()
   {
-    return array(
-      'books'   => array(
-        'properties' => array(
-          'id'   => array(
-            'type' => 'integer'
-          ),
-          'name' => array(
-            'type' => 'string'
-          )
-        )
-      ),
-      'movies' => array(
-        'properties' => array(
-          'name' => array(
-            'type' => 'string'
-          )
-        )
-      )
-    );
+    $this->setTypes([
+      'books' => [
+        'properties' => [
+          'id' => ['type' => 'integer'],
+          'name' => ['type' => 'string'],
+        ]
+      ],
+      'movies' => [
+        'properties' => [
+          'name' => ['type' => 'string'],
+        ]
+      ]
+    ]);
   }
 }
 ```
 
-This the minimum required for defining an index. If you require more extensive configuration, override the `getBody`
-method.
+This the minimum required for defining an index. Inside the `setup()` method you can setup your index further,
+for example adding settings, aggregations, .... An index is [body aware](https://github.com/madewithlove/elasticsearcher/tree/master/src/Traits/BodyTrait.php)
+for easy manipulation.
 
 ### Using re-useable fragments
 

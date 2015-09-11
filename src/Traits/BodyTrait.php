@@ -29,6 +29,14 @@ trait BodyTrait
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getBody()
+	{
+		return $this->body;
+	}
+
+	/**
 	 * Set a value in the body using the dotted notation.
 	 *
 	 * @param string $key
@@ -44,10 +52,15 @@ trait BodyTrait
 	}
 
 	/**
-	 * @return array
+	 * Get a value in the body using the dotted notation.
+	 *
+	 * @param string $key
+	 * @param mixed $default
+	 *
+	 * @return $this
 	 */
-	public function getBody()
+	public function get($key, $default = null)
 	{
-		return $this->body;
+		return Arr::get($this->body, $key, $default);
 	}
 }

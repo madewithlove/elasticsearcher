@@ -9,22 +9,16 @@ class MoviesIndex extends AbstractIndex
 		return 'movies';
 	}
 
-	public function getTypes()
+	public function setup()
 	{
-		return array(
-			'movies' => array(
-				'properties' => array(
-					'id'   => array(
-						'type' => 'integer'
-					),
-					'name' => array(
-						'type' => 'string'
-					),
-					'year' => array(
-						'type' => 'integer',
-					)
-				)
-			)
-		);
+		$this->setTypes([
+			'movies' => [
+				'properties' => [
+					'id' => ['type' => 'integer'],
+					'name' => ['type' => 'string'],
+					'year' => ['type' => 'integer'],
+				]
+			]
+		]);
 	}
 }
