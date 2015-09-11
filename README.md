@@ -26,19 +26,20 @@ class MoviesFrom2014Query extends AbstractQuery
 	{
 		$this->searchIn('movies', 'movies');
 
-		$body = array(
-			'query' => array(
-				'filtered' => array(
-					'filter' => array(
-						'term' => array(
-							'year' => 2014
-						)
-					)
-				)
-			)
-		);
-
+		// Full notation
+		$body = [
+			'query' => [
+				'filtered' => [
+					'filter' => [
+						'term' => ['year' => 2014]
+					]
+				]
+			]
+		];
 		$this->setBody($body);
+
+		// Short (dotted) notation
+		$this->set('query.filtered.filter.term.year', 2014);
 	}
 }
 
@@ -58,17 +59,7 @@ class MoviesFrom2014Query extends AbstractQuery
 	{
 		$this->searchIn('movies', 'movies');
 
-		$body = array(
-			'query' => array(
-				'filtered' => array(
-					'filter' => array(
-						new YearFilter(2014)
-					)
-				)
-			)
-		);
-
-		$this->setBody($body);
+		$this->set('query.filtered.filter', [new YearFilter(2014)]);
 	}
 }
 ```

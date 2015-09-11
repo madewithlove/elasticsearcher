@@ -60,9 +60,9 @@ $suggestionsIndex  = new SuggestionsIndex();
 $searcher->indicesManager()->register($suggestionsIndex);
 
 // Grouped registration
-$indices = array(
+$indices = [
   $suggestionsIndex
-);
+];
 $searcher->indicesManager()->registerIndices($indices);
 
 // Other

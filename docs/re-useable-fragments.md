@@ -5,6 +5,9 @@ comes with a build-in set of fragments but you are encouraged to build your own.
 For example: `BookingRangeFilter(date, date)`, `MovieIDFilter(int)`, .... As long as they extend
 `ElasticSearcher\Abstracts\AbstractFragment` they can be used in queries or indices.
 
+A fragment is [body aware](https://github.com/madewithlove/elasticsearcher/tree/master/src/Traits/BodyTrait.php)
+for easy manipulation.
+
 ## Examples
 
 ```php
