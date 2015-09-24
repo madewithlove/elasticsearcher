@@ -31,8 +31,9 @@ var_dump($result->getResults());
 
 ## Body building
 
-Inside your Query class you can build the body of the query however you like. We only require you to call `setBody` with
-the body array. Here are some examples.
+Inside your Query class you can build the body of the query however you like. A query is
+[body aware](https://github.com/madewithlove/elasticsearcher/tree/master/src/Traits/BodyTrait.php)
+for easy manipulation. Here are some examples.
 
 Basic example:
 
@@ -45,19 +46,20 @@ class MoviesYouMightLikeQuery extends QueryAbstract
   {
     $this->searchIn('suggestions', 'movies');
 
-     $body = array(
-      'query' => array(
-        'filtered' => array(
-          'filter' => array(
-            'term' => array(
-              'status' => 'active'
-            )
-          )
-        )
-      )
-     );
+    // Long notation
+    $body = [
+      'query' => [
+        'filtered' => [
+          'filter' => [
+            'term' => ['status' => 'active']
+          ]
+        ]
+      ]
+    ];
+    $this->setBody($body);
 
-     $this->setBody($body);
+    // Short dotted notation
+    $this->set('query.filtered.filter.term.status', 'active');
   }
 }
 ```
@@ -73,19 +75,7 @@ class MoviesYouMightLikeQuery extends AbstractQuery
   {
     $this->searchIn('suggestions', 'movies');
 
-     $body = array(
-      'query' => array(
-        'filtered' => array(
-          'filter' => array(
-            'term' => array(
-              'status' => $this->getData('status')
-            )
-          )
-        )
-      )
-     );
-
-     $this->setBody($body);
+    $this->set('query.filtered.filter.term.status', $this->getData('status'));
   }
 }
 ```

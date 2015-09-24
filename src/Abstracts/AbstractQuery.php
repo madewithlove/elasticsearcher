@@ -5,12 +5,15 @@ namespace ElasticSearcher\Abstracts;
 use ElasticSearcher\ElasticSearcher;
 use ElasticSearcher\Parsers\ArrayResultParser;
 use ElasticSearcher\Parsers\FragmentParser;
+use ElasticSearcher\Traits\BodyTrait;
 
 /**
  * Base class for queries.
  */
 abstract class AbstractQuery
 {
+	use BodyTrait;
+
 	/**
 	 * @var ElasticSearcher
 	 */
@@ -29,13 +32,6 @@ abstract class AbstractQuery
 	 * @var array
 	 */
 	protected $types = [];
-
-	/**
-	 * Body of the query to execute.
-	 *
-	 * @var array
-	 */
-	protected $body = [];
 
 	/**
 	 * Data that can be used when building a query.
@@ -140,14 +136,6 @@ abstract class AbstractQuery
 
 		// Remove doubles.
 		$this->types = array_unique($this->types);
-	}
-
-	/**
-	 * @param array $body
-	 */
-	protected function setBody(array $body)
-	{
-		$this->body = $body;
 	}
 
 	/**

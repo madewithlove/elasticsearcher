@@ -9,32 +9,22 @@ class AuthorsIndex extends AbstractIndex
 		return 'authors';
 	}
 
-	public function getTypes()
+	public function setup()
 	{
-		return array(
-			'directors' => array(
-				'properties' => array(
-					'id'         => array(
-						'type' => 'integer'
-					),
-					'first_name' => array(
-						'type' => 'string'
-					),
-					'last_name'  => array(
-						'type' => 'string'
-					)
-				)
-			),
-			'producers'  => array(
-				'properties' => array(
-					'id'   => array(
-						'type' => 'integer'
-					),
-					'name' => array(
-						'type' => 'string'
-					)
-				)
-			)
-		);
+		$this->setTypes([
+			'directors' => [
+				'properties' => [
+					'id' => ['type' => 'integer'],
+					'first_name' => ['type' => 'string'],
+					'last_name' => ['type' => 'string']
+				]
+			],
+			'producers' => [
+				'properties' => [
+					'id' => ['type' => 'integer'],
+					'name' => ['type' => 'string']
+				]
+			]
+		]);
 	}
 }
