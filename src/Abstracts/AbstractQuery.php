@@ -6,6 +6,7 @@ use ElasticSearcher\ElasticSearcher;
 use ElasticSearcher\Parsers\ArrayResultParser;
 use ElasticSearcher\Parsers\FragmentParser;
 use ElasticSearcher\Traits\BodyTrait;
+use Illuminate\Support\Arr;
 
 /**
  * Base class for queries.
@@ -39,6 +40,13 @@ abstract class AbstractQuery
 	 * @var array
 	 */
 	protected $data = [];
+
+	/**
+	 * Parameters to be added to the search URL.
+	 *
+	 * @var array
+	 */
+	protected $queryStringParams = [];
 
 	/**
 	 * @var AbstractResultParser
@@ -139,6 +147,49 @@ abstract class AbstractQuery
 	}
 
 	/**
+	 * @param string $name
+	 * @param mixed $value
+	 */
+	protected function setQueryStringParam($name, $value)
+	{
+		$this->queryStringParams[$name] = $value;
+	}
+
+	/**
+	 * @param string $name
+	 */
+	protected function removeQueryStringParam($name)
+	{
+		unset($this->queryStringParams[$name]);
+	}
+
+	/**
+	 * @param string $name
+	 * @return mixed
+	 */
+	protected function getQueryStringParam($name)
+	{
+		return Arr::get($this->queryStringParams, $name);
+	}
+
+	/**
+	 * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-search-type.html
+	 * @param string $type
+	 */
+	protected function setSearchType($type)
+	{
+		$this->setQueryStringParam('search_type', $type);
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getSearchType()
+	{
+		return $this->getQueryStringParam('search_type');
+	}
+
+	/**
 	 * Build the query by adding all chunks together.
 	 *
 	 * @return array
@@ -159,6 +210,11 @@ abstract class AbstractQuery
 
 		// Replace Fragments with their raw body.
 		$query['body'] = $this->fragmentParser->parse($this->body);
+
+		// Add all query string params, the SDK will only add known params to the URL.
+		foreach ($this->queryStringParams as $paramName => $paramValue) {
+			$query[$paramName] = $paramValue;
+		}
 
 		return $query;
 	}
