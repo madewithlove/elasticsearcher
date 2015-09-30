@@ -119,4 +119,14 @@ class QueryTest extends ElasticSearcherTestCase
 		$this->assertEquals(['movies'], $query->getIndices());
 		$this->assertEquals(['authors', 'directors'], $query->getTypes());
 	}
+
+	public function testSettingSearchType()
+	{
+		$query = new CountMoviesFrom2014Query($this->getElasticSearcher());
+
+		$raw = $query->getRawQuery();
+
+		$this->assertArrayHasKey('search_type', $raw);
+		$this->assertEquals('count', $raw['search_type']);
+	}
 }
