@@ -37,7 +37,7 @@ class MoviesFrom2014Query extends AbstractQuery
 		// Full notation
 		$body = [
 			'query' => [
-				'filtered' => [
+				'bool' => [
 					'filter' => [
 						'term' => ['year' => 2014]
 					]
@@ -47,7 +47,7 @@ class MoviesFrom2014Query extends AbstractQuery
 		$this->setBody($body);
 
 		// Short (dotted) notation
-		$this->set('query.filtered.filter.term.year', 2014);
+		$this->set('query.bool.filter.term.year', 2014);
 	}
 }
 
@@ -67,7 +67,7 @@ class MoviesFrom2014Query extends AbstractQuery
 	{
 		$this->searchIn('movies', 'movies');
 
-		$this->set('query.filtered.filter', [new YearFilter(2014)]);
+		$this->set('query.bool.filter', [new YearFilter(2014)]);
 	}
 }
 ```

@@ -49,7 +49,7 @@ class MoviesYouMightLikeQuery extends QueryAbstract
     // Long notation
     $body = [
       'query' => [
-        'filtered' => [
+        'bool' => [
           'filter' => [
             'term' => ['status' => 'active']
           ]
@@ -59,7 +59,7 @@ class MoviesYouMightLikeQuery extends QueryAbstract
     $this->setBody($body);
 
     // Short dotted notation
-    $this->set('query.filtered.filter.term.status', 'active');
+    $this->set('query.bool.filter.term.status', 'active');
   }
 }
 ```
@@ -75,7 +75,7 @@ class MoviesYouMightLikeQuery extends AbstractQuery
   {
     $this->searchIn('suggestions', 'movies');
 
-    $this->set('query.filtered.filter.term.status', $this->getData('status'));
+    $this->set('query.bool.filter.term.status', $this->getData('status'));
   }
 }
 ```

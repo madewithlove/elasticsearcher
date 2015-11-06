@@ -11,7 +11,7 @@ class MoviesFromXYearQuery extends AbstractQuery
 
 		$body = array(
 			'query' => array(
-				'filtered' => array(
+				'bool' => array(
 					'filter' => array(
 						$this->parseYear()
 					)

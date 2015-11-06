@@ -22,7 +22,7 @@ class MoviesYouMightLikeQuery extends AbstractQuery
 
      $body = array(
       'query' => array(
-        'filtered' => array(
+        'bool' => array(
           'filter' => array(
             new TermFilter('status', 'active')
           )

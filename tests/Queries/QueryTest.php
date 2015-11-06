@@ -48,7 +48,7 @@ class QueryTest extends ElasticSearcherTestCase
 			'type'  => 'movies',
 			'body'  => [
 				'query' => [
-					'filtered' => [
+					'bool' => [
 						'filter' => [
 							['term' => ['year' => 2014]]
 						]
@@ -70,7 +70,7 @@ class QueryTest extends ElasticSearcherTestCase
 			'type'  => 'movies',
 			'body'  => [
 				'query' => [
-					'filtered' => [
+					'bool' => [
 						'filter' => [
 							['term' => ['year' => 2013]]
 						]
@@ -92,7 +92,7 @@ class QueryTest extends ElasticSearcherTestCase
 			'type'  => 'movies',
 			'body'  => [
 				'query' => [
-					'filtered' => [
+					'bool' => [
 						'filter' => [
 							['term' => ['id' => 1]]
 						]
