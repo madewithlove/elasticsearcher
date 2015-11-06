@@ -13,6 +13,13 @@ Installation of the latest version is easy via [composer](https://getcomposer.or
 ```
 composer require madewithlove/elasticsearcher
 ```
+
+### Versions
+
+| Elasticsearch | Elasticsearcher |
+|---------------|-----------------|
+| 1.x           | ^0.3            |
+
 ## Features
 
 ### Query class
