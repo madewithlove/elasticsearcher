@@ -1,7 +1,7 @@
 <?php
 
 use ElasticSearcher\Abstracts\AbstractQuery;
-use ElasticSearcher\Fragments\Filters\TermFilter;
+use ElasticSearcher\Fragments\Queries\TermQuery;
 
 class CountMoviesFrom2014Query extends AbstractQuery
 {
@@ -9,7 +9,7 @@ class CountMoviesFrom2014Query extends AbstractQuery
 	{
 		$this->searchIn('movies', 'movies');
 
-		$this->set('query.bool.filter', [new TermFilter('year', 2014)]);
+		$this->set('query.bool.filter', [new TermQuery('year', 2014)]);
 
 		$this->setSearchType('count');
 	}

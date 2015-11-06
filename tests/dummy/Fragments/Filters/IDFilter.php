@@ -1,7 +1,7 @@
 <?php
 
 use ElasticSearcher\Abstracts\AbstractFragment;
-use ElasticSearcher\Fragments\Filters\TermFilter;
+use ElasticSearcher\Fragments\Queries\TermQuery;
 
 class IDFilter extends AbstractFragment
 {
@@ -20,6 +20,6 @@ class IDFilter extends AbstractFragment
 
 	public function getBody()
 	{
-		return new TermFilter('id', $this->id);
+		return new TermQuery('id', $this->id);
 	}
 }

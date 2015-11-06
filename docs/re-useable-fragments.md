@@ -12,7 +12,7 @@ for easy manipulation.
 
 ```php
 use ElasticSearcher\Abstracts\AbstractQuery;
-use ElasticSearcher\Fragments\Filters\TermFilter;
+use ElasticSearcher\Fragments\Queries\TermQuery;
 
 class MoviesYouMightLikeQuery extends AbstractQuery
 {
@@ -24,7 +24,7 @@ class MoviesYouMightLikeQuery extends AbstractQuery
       'query' => array(
         'bool' => array(
           'filter' => array(
-            new TermFilter('status', 'active')
+            new TermQuery('status', 'active')
           )
         )
       )
@@ -72,8 +72,8 @@ root. You can do this by setting the `mergeWithParent` property on a fragment to
 ```php
 $body = [
 	'and' => [
-		new TermFilter('status', 'active'),
-		new TermFilter('published', true),
+		new TermQuery('status', 'active'),
+		new TermQuery('published', true),
 	]
 ];
 

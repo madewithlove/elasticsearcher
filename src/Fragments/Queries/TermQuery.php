@@ -1,16 +1,16 @@
 <?php
 
-namespace ElasticSearcher\Fragments\Filters;
+namespace ElasticSearcher\Fragments\Queries;
 
 use ElasticSearcher\Abstracts\AbstractFragment;
 
 /**
- * Simple term filter.
+ * Simple term query.
  *
- * @see     http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-term-filter.html
- * @package ElasticSearcher\Fragments\Filters
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html
+ * @package ElasticSearcher\Fragments\Queries
  */
-class TermFilter extends AbstractFragment
+class TermQuery extends AbstractFragment
 {
 	/**
 	 * @param string $field

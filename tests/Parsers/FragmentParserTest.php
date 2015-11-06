@@ -1,7 +1,7 @@
 <?php
 
 use ElasticSearcher\Parsers\FragmentParser;
-use ElasticSearcher\Fragments\Filters\TermFilter;
+use ElasticSearcher\Fragments\Queries\TermQuery;
 use ElasticSearcher\Fragments\Analyzers\StandardAnalyzer;
 
 class FragmentParserTest extends ElasticSearcherTestCase
@@ -11,7 +11,7 @@ class FragmentParserTest extends ElasticSearcherTestCase
 		$parser = new FragmentParser();
 
 		$body = [
-			'query' => new TermFilter('name', 'John'),
+			'query' => new TermQuery('name', 'John'),
 		];
 		$expectedBody = [
 			'query' => [
@@ -32,8 +32,8 @@ class FragmentParserTest extends ElasticSearcherTestCase
 			'query' => [
 				'bool' => [
 					'and' => [
-						new TermFilter('name', 'John'),
-						new TermFilter('category', 'authors'),
+						new TermQuery('name', 'John'),
+						new TermQuery('category', 'authors'),
 					]
 				]
 			]
@@ -68,7 +68,7 @@ class FragmentParserTest extends ElasticSearcherTestCase
 			'query' => [
 				'bool' => [
 					'and' => [
-						new TermFilter('name', new TermFilter('category', 'authors')),
+						new TermQuery('name', new TermQuery('category', 'authors')),
 					]
 				]
 			]
