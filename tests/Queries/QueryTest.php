@@ -48,7 +48,7 @@ class QueryTest extends ElasticSearcherTestCase
 			'type'  => 'movies',
 			'body'  => [
 				'query' => [
-					'filtered' => [
+					'bool' => [
 						'filter' => [
 							['term' => ['year' => 2014]]
 						]
@@ -70,7 +70,7 @@ class QueryTest extends ElasticSearcherTestCase
 			'type'  => 'movies',
 			'body'  => [
 				'query' => [
-					'filtered' => [
+					'bool' => [
 						'filter' => [
 							['term' => ['year' => 2013]]
 						]
@@ -92,7 +92,7 @@ class QueryTest extends ElasticSearcherTestCase
 			'type'  => 'movies',
 			'body'  => [
 				'query' => [
-					'filtered' => [
+					'bool' => [
 						'filter' => [
 							['term' => ['id' => 1]]
 						]
@@ -118,5 +118,15 @@ class QueryTest extends ElasticSearcherTestCase
 		$query->searchIn(['movies'], ['authors', 'directors']);
 		$this->assertEquals(['movies'], $query->getIndices());
 		$this->assertEquals(['authors', 'directors'], $query->getTypes());
+	}
+
+	public function testSettingSearchType()
+	{
+		$query = new CountMoviesFrom2014Query($this->getElasticSearcher());
+
+		$raw = $query->getRawQuery();
+
+		$this->assertArrayHasKey('search_type', $raw);
+		$this->assertEquals('count', $raw['search_type']);
 	}
 }

@@ -3,6 +3,7 @@
 namespace ElasticSearcher;
 
 use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
 use ElasticSearcher\Managers\IndicesManager;
 use ElasticSearcher\Managers\DocumentsManager;
 
@@ -45,11 +46,7 @@ class ElasticSearcher
 	 */
 	public function createClient()
 	{
-		$params = array(
-			'hosts' => $this->environment->hosts
-		);
-
-		$client = new Client($params);
+		$client = ClientBuilder::fromConfig($this->environment->all());
 
 		$this->setClient($client);
 	}

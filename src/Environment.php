@@ -40,4 +40,14 @@ class Environment
 	{
 		return $this->variables[$name] = $value;
 	}
+
+	/**
+	 * Get all defined variables.
+	 *
+	 * @return array
+	 */
+	public function all()
+	{
+		return $this->variables;
+	}
 }

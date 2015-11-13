@@ -8,6 +8,6 @@ class MovieWithIDXQuery extends AbstractQuery
 	{
 		$this->searchIn('movies', 'movies');
 
-		$this->set('query.filtered.filter', [new IDFilter($this->getData('id'))]);
+		$this->set('query.bool.filter', [new IDFilter($this->getData('id'))]);
 	}
 }

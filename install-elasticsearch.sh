@@ -3,13 +3,13 @@
 echo ">>> Installing Elasticsearch"
 
 # Set some variables
-ELASTICSEARCH_VERSION=1.7.1 # Check http://www.elasticsearch.org/download/ for latest version
+ELASTICSEARCH_VERSION=2.0.0 # Check http://www.elasticsearch.org/download/ for latest version
 
 # Install prerequisite: Java
 # -qq implies -y --force-yes
 sudo apt-get install -qq openjdk-7-jre-headless
 
-wget --quiet https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-$ELASTICSEARCH_VERSION.deb
+wget --quiet https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/$ELASTICSEARCH_VERSION/elasticsearch-$ELASTICSEARCH_VERSION.deb
 sudo dpkg -i elasticsearch-$ELASTICSEARCH_VERSION.deb
 rm elasticsearch-$ELASTICSEARCH_VERSION.deb
 
@@ -17,6 +17,7 @@ rm elasticsearch-$ELASTICSEARCH_VERSION.deb
 sudo sed -i "s/# index.number_of_shards: 1/index.number_of_shards: 1/" /etc/elasticsearch/elasticsearch.yml
 sudo sed -i "s/# index.number_of_replicas: 0/index.number_of_replicas: 0/" /etc/elasticsearch/elasticsearch.yml
 sudo sed -i "s/# bootstrap.mlockall: true/bootstrap.mlockall: true/" /etc/elasticsearch/elasticsearch.yml
+sudo sed -i "s/# network.host: 192.168.0.1/network.host: 0.0.0.0/" /etc/elasticsearch/elasticsearch.yml
 sudo service elasticsearch restart
 
 # Configure to start up Elasticsearch automatically

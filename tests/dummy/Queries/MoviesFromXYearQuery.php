@@ -1,7 +1,7 @@
 <?php
 
 use ElasticSearcher\Abstracts\AbstractQuery;
-use ElasticSearcher\Fragments\Filters\TermFilter;
+use ElasticSearcher\Fragments\Queries\TermQuery;
 
 class MoviesFromXYearQuery extends AbstractQuery
 {
@@ -11,7 +11,7 @@ class MoviesFromXYearQuery extends AbstractQuery
 
 		$body = array(
 			'query' => array(
-				'filtered' => array(
+				'bool' => array(
 					'filter' => array(
 						$this->parseYear()
 					)
@@ -26,7 +26,7 @@ class MoviesFromXYearQuery extends AbstractQuery
 	{
 		$year = $this->getData('year');
 		if ($year) {
-			return new TermFilter('year', $year);
+			return new TermQuery('year', $year);
 		}
 	}
 }
