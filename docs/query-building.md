@@ -93,3 +93,60 @@ var_dump($result->getResults());
 
 You can abstract parts of your query to separate classes and re-use them. More about it in the [re-useable fragments](re-useable-fragments.md)
 documentation.
+
+## Pagination
+
+You can use a pagination trait in your query like this:
+
+```php
+use ElasticSearcher\Abstracts\AbstractQuery;
+use ElasticSearcher\Fragments\Traits\PaginatedTrait;
+
+class MoviesYouMightLikeQuery extends AbstractQuery
+{
+  use PaginatedTrait;
+
+  public function setup()
+  {
+    $this->searchIn('suggestions', 'movies');
+
+    // Page 2 with 20 results per page.
+    $this->paginate(2, 20);
+  }
+}
+```
+
+## Sorting
+
+You can use a sorting trait in your query which allows you to define which
+fields to sort on. Next to that list you can sort by one specific field. When
+sorting by one field, it will check if that field is already set in the
+sort so you don't have duplicates. So you can combine both for flexibility.
+
+Examples:
+
+```php
+use ElasticSearcher\Abstracts\AbstractQuery;
+use ElasticSearcher\Fragments\Traits\SortableTrait;
+
+class MoviesYouMightLikeQuery extends AbstractQuery
+{
+  use SortableTrait;
+
+  public function setup()
+  {
+    $this->searchIn('suggestions', 'movies');
+
+    $this->sort([
+		'name' => 'asc',
+		'age' => ['order' => 'asc', 'mode' => 'avg'],
+		'date' => 'asc',
+	]);
+
+    $this->sortBy('name', 'desc');
+
+    // OR: combined with external data
+    $this->sortBy($this->getData('sort'), $this->getData('direction'));
+  }
+}
+```
