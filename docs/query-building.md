@@ -112,6 +112,9 @@ class MoviesYouMightLikeQuery extends AbstractQuery
 
     // Page 2 with 20 results per page.
     $this->paginate(2, 20);
+
+    // OR: combined with external data
+    $this->paginate($this->getData('page'), $this->getData('per-page'));
   }
 }
 ```
@@ -119,9 +122,9 @@ class MoviesYouMightLikeQuery extends AbstractQuery
 ## Sorting
 
 You can use a sorting trait in your query which allows you to define which
-fields to sort on. Next to that list you can sort by one specific field. When
-sorting by one field, it will check if that field is already set in the
-sort so you don't have duplicates. So you can combine both for flexibility.
+fields to sort on. You can define a list of fields to sort on, and/or you can sort
+on one specific field. If you do both at the same time, it will combine them.
+This allows you to sort on a number of fields but give priority to one.
 
 Examples:
 
@@ -138,10 +141,10 @@ class MoviesYouMightLikeQuery extends AbstractQuery
     $this->searchIn('suggestions', 'movies');
 
     $this->sort([
-		'name' => 'asc',
-		'age' => ['order' => 'asc', 'mode' => 'avg'],
-		'date' => 'asc',
-	]);
+      'name' => 'asc',
+      'age' => ['order' => 'asc', 'mode' => 'avg'],
+      'date' => 'asc',
+    ]);
 
     $this->sortBy('name', 'desc');
 
