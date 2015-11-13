@@ -9,6 +9,7 @@ require __DIR__.'/dummy/Queries/MoviesFromXYearQuery.php';
 require __DIR__.'/dummy/Queries/MovieWithIDXQuery.php';
 require __DIR__.'/dummy/Queries/PaginatedMoviesFrom2014Query.php';
 require __DIR__.'/dummy/Queries/CountMoviesFrom2014Query.php';
+require __DIR__.'/dummy/Queries/SortedQuery.php';
 require __DIR__.'/dummy/Fragments/Filters/IDFilter.php';
 
 // Test host (should be inside the vagrant box).
