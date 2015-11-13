@@ -4,6 +4,7 @@ namespace ElasticSearcher\Fragments\Traits;
 /**
  * Shortcut to adding pagination to a Query.
  *
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html
  * @package ElasticSearcher\Fragments\Traits
  */
 trait PaginatedTrait
