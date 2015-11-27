@@ -48,6 +48,9 @@ class MoviesFrom2014Query extends AbstractQuery
 
 		// Short (dotted) notation
 		$this->set('query.bool.filter.term.year', 2014);
+
+		$this->paginate(2, 20);
+		$this->sortBy('name', 'asc');
 	}
 }
 
