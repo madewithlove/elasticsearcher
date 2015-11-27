@@ -1,5 +1,7 @@
 <?php
 
+use ElasticSearcher\Dummy\Queries\SortedQuery;
+
 class SortableTraitTest extends ElasticSearcherTestCase
 {
 	public function testSettingSortingFields()

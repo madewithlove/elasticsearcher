@@ -1,6 +1,8 @@
 <?php
 
 use ElasticSearcher\Managers\IndicesManager;
+use ElasticSearcher\Dummy\Indexes\AuthorsIndex;
+use ElasticSearcher\Dummy\Indexes\MoviesIndex;
 
 class IndicesManagerTest extends ElasticSearcherTestCase
 {

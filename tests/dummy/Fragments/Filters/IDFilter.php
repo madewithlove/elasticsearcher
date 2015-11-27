@@ -1,5 +1,7 @@
 <?php
 
+namespace ElasticSearcher\Dummy\Fragments\Filters;
+
 use ElasticSearcher\Abstracts\AbstractFragment;
 use ElasticSearcher\Fragments\Queries\TermQuery;
 

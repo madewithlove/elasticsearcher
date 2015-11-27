@@ -8,6 +8,11 @@
 			"ElasticSearcher\\": ["src"]
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"ElasticSearcher\\Dummy\\": ["tests/dummy"]
+		}
+	},
 	"require": {
 		"elasticsearch/elasticsearch": "~2.0",
 		"illuminate/support": "^4.2|~5"

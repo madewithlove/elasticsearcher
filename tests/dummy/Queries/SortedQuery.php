@@ -1,5 +1,7 @@
 <?php
 
+namespace ElasticSearcher\Dummy\Queries;
+
 use ElasticSearcher\Abstracts\AbstractQuery;
 use ElasticSearcher\Fragments\Traits\SortableTrait;
 
