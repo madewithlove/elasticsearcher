@@ -1,5 +1,11 @@
 <?php
 
+use ElasticSearcher\Dummy\Indexes\MoviesIndex;
+use ElasticSearcher\Dummy\Queries\MoviesFrom2014Query;
+use ElasticSearcher\Dummy\Queries\MoviesFromXYearQuery;
+use ElasticSearcher\Dummy\Queries\MovieWithIDXQuery;
+use ElasticSearcher\Dummy\Queries\CountMoviesFrom2014Query;
+
 class QueryTest extends ElasticSearcherTestCase
 {
 	public function setUp()

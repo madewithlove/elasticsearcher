@@ -1,5 +1,7 @@
 <?php
 
+use ElasticSearcher\Dummy\Queries\PaginatedMoviesFrom2014Query;
+
 class PaginatedTraitTest extends ElasticSearcherTestCase
 {
 	public function testPaginating()

@@ -1,6 +1,7 @@
 <?php
 
 use ElasticSearcher\Managers\DocumentsManager;
+use ElasticSearcher\Dummy\Indexes\MoviesIndex;
 
 class DocumentsManagerTest extends ElasticSearcherTestCase
 {
