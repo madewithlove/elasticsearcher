@@ -1,5 +1,7 @@
 <?php
 
+namespace ElasticSearcher\Dummy\Indexes;
+
 use ElasticSearcher\Abstracts\AbstractIndex;
 
 class MoviesIndex extends AbstractIndex

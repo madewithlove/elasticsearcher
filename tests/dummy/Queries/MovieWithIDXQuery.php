@@ -1,6 +1,9 @@
 <?php
 
+namespace ElasticSearcher\Dummy\Queries;
+
 use ElasticSearcher\Abstracts\AbstractQuery;
+use ElasticSearcher\Dummy\Fragments\Filters\IDFilter;
 
 class MovieWithIDXQuery extends AbstractQuery
 {

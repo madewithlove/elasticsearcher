@@ -3,6 +3,7 @@
 use ElasticSearcher\Parsers\FragmentParser;
 use ElasticSearcher\Fragments\Queries\TermQuery;
 use ElasticSearcher\Fragments\Analyzers\StandardAnalyzer;
+use ElasticSearcher\Dummy\Fragments\Filters\IDFilter;
 
 class FragmentParserTest extends ElasticSearcherTestCase
 {
