@@ -14,7 +14,7 @@
 		}
 	},
 	"require": {
-		"elasticsearch/elasticsearch": "~2.0",
+		"elasticsearch/elasticsearch": "~2.1",
 		"illuminate/support": "^4.2|~5"
 	},
 	"require-dev": {
