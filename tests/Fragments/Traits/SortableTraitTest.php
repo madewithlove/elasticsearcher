@@ -9,14 +9,14 @@ class SortableTraitTest extends ElasticSearcherTestCase
 		$this->hasSort(
 			[
 				'sort_fields' => [
-					'name' => 'asc',
+					'name',
 					'age' => ['order' => 'asc', 'mode' => 'avg'],
 					'date' => 'asc',
 				]
 			],
 			null,
 			[
-				['name' => 'asc'],
+				'name',
 				['age' => ['order' => 'asc', 'mode' => 'avg']],
 				['date' => 'asc'],
 			]
@@ -69,6 +69,72 @@ class SortableTraitTest extends ElasticSearcherTestCase
 				['name' => 'asc'],
 				['age' => ['order' => 'asc', 'mode' => 'avg']],
 				['date' => 'asc'],
+			]
+		);
+	}
+
+	public function testSortingAFieldWithoutSortDirection()
+	{
+		$fields = [
+			'sort_fields' => [
+				'name',
+				'age' => ['order' => 'asc', 'mode' => 'avg'],
+				'date' => 'desc',
+			]
+		];
+
+		$this->hasSort(
+			$fields,
+			['sort' => 'date', 'sort_direction' => null],
+			[
+				['date' => 'desc'],
+				'name',
+				['age' => ['order' => 'asc', 'mode' => 'avg']],
+			]
+		);
+		$this->hasSort(
+			$fields,
+			['sort' => 'age', 'sort_direction' => null],
+			[
+				['age' => ['order' => 'asc', 'mode' => 'avg']],
+				'name',
+				['date' => 'desc'],
+			]
+		);
+	}
+
+	public function testSortingAFieldWithoutPredefinedDirection()
+	{
+		$fields = [
+			'sort_fields' => [
+				'name',
+				'age' => ['order' => 'asc', 'mode' => 'avg'],
+				'date' => 'desc',
+			]
+		];
+
+		$this->hasSort(
+			[
+				'sort_fields' => [
+					'name',
+					'age' => ['order' => 'asc', 'mode' => 'avg'],
+					'date' => 'desc',
+				]
+			],
+			['sort' => 'name'],
+			[
+				'name',
+				['age' => ['order' => 'asc', 'mode' => 'avg']],
+				['date' => 'desc'],
+			]
+		);
+		$this->hasSort(
+			$fields,
+			['sort' => 'name', 'sort_direction' => 'desc'],
+			[
+				['name' => 'desc'],
+				['age' => ['order' => 'asc', 'mode' => 'avg']],
+				['date' => 'desc'],
 			]
 		);
 	}

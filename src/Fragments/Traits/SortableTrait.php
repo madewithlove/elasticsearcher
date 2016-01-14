@@ -16,10 +16,15 @@ trait SortableTrait
 	 */
 	public function sort(array $fields)
 	{
-		// Each field needs to be wrapped in an array.
 		$sortFields = [];
-		foreach ($fields as $field => $options) {
-			$sortFields[] = [$field => $options];
+		foreach ($fields as $field => $value) {
+			// Simplest form, just a field name.
+			if (is_numeric($field) && !is_array($value)) {
+				$sortFields[] = $value;
+			} // Field with direction and/or other options.
+			else {
+				$sortFields[] = [$field => $value];
+			}
 		}
 
 		$this->set('sort', $sortFields);
@@ -29,25 +34,37 @@ trait SortableTrait
 
 	/**
 	 * @param string $fieldName
-	 * @param string $direction
+	 * @param string|null $direction
 	 *
 	 * @return $this
 	 */
-	public function sortBy($fieldName, $direction = 'asc')
+	public function sortBy($fieldName, $direction = null)
 	{
 		$predefinedFields = $this->get('sort');
 		$sortingFields = [];
 
-		// Field exists, just need to set the direction.
+		// Field exists, prioritize and set direction (if any).
 		if ($field = $this->findField($fieldName, $predefinedFields)) {
-			// Defined as {"post_date" : {"order" : "asc", "mode": "avg"}}
-			if (is_array($field[$fieldName])) {
-				$field[$fieldName]['order'] = $direction;
-			} // Defined as {"post_date" : "asc"}
-			else {
-				$field[$fieldName] = $direction;
+			// Field was defined without options.
+			if (!is_array($field)) {
+				if ($direction) {
+					$sortingFields[] = [$fieldName => $direction];
+				} else {
+					$sortingFields[] = $fieldName;
+				}
+			} else {
+				// Set direction, otherwise it will just use the default definition.
+				if ($direction) {
+					// Defined as {"post_date" : {"order" : "asc", "mode": "avg"}}
+					if (is_array($field[$fieldName])) {
+						$field[$fieldName]['order'] = $direction;
+					} // Defined as {"post_date" : "asc"}
+					else {
+						$field[$fieldName] = $direction;
+					}
+				}
+				$sortingFields[] = $field;
 			}
-			$sortingFields[] = $field;
 		} // Field does not exist, add it.
 		else {
 			$sortingFields[] = [$fieldName => $direction];
@@ -56,7 +73,9 @@ trait SortableTrait
 		// Add the predefined fields but remove the one we are sorting on.
 		if ($predefinedFields) {
 			foreach ($predefinedFields as $field) {
-				if (array_key_exists($fieldName, $field)) {
+				if (!is_array($field) && $fieldName == $field) {
+					continue;
+				} elseif (is_array($field) && array_key_exists($fieldName, $field)) {
 					continue;
 				}
 
@@ -77,7 +96,9 @@ trait SortableTrait
 	{
 		if ($fields) {
 			foreach ($fields as $field) {
-				if (array_key_exists($fieldName, $field)) {
+				if (!is_array($field) && $field == $fieldName) {
+					return $field;
+				} elseif (is_array($field) && array_key_exists($fieldName, $field)) {
 					return $field;
 				}
 			}
