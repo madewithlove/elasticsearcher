@@ -1,10 +1,12 @@
 <?php
 
+use ElasticSearcher\Dummy\Indexes\BooksIndex;
 use ElasticSearcher\Dummy\Indexes\MoviesIndex;
 use ElasticSearcher\Dummy\Queries\MoviesFrom2014Query;
 use ElasticSearcher\Dummy\Queries\MoviesFromXYearQuery;
 use ElasticSearcher\Dummy\Queries\MovieWithIDXQuery;
 use ElasticSearcher\Dummy\Queries\CountMoviesFrom2014Query;
+use ElasticSearcher\Dummy\Queries\BooksFrom2014Query;
 
 class QueryTest extends ElasticSearcherTestCase
 {
@@ -15,10 +17,15 @@ class QueryTest extends ElasticSearcherTestCase
 		// Create our example index.
 		$indicesManager = $this->getElasticSearcher()->indicesManager();
 		$indicesManager->register(new MoviesIndex());
+		$indicesManager->register(new BooksIndex());
 		if ($indicesManager->exists('movies')) {
 			$indicesManager->delete('movies');
 		}
 		$indicesManager->create('movies');
+		if ($indicesManager->exists('books')) {
+			$indicesManager->delete('books');
+		}
+		$indicesManager->create('books');
 
 		// Index some test data.
 		$documentsManager = $this->getElasticSearcher()->documentsManager();
@@ -34,7 +41,7 @@ class QueryTest extends ElasticSearcherTestCase
 	public function testData()
 	{
 		$query = new MoviesFrom2014Query($this->getElasticSearcher());
-		$data  = ['year' => 2014, 'type' => 'dvd'];
+		$data = ['year' => 2014, 'type' => 'dvd'];
 		$query->addData($data);
 
 		$this->assertEquals($data, $query->getData());
@@ -51,8 +58,8 @@ class QueryTest extends ElasticSearcherTestCase
 
 		$expectedQuery = [
 			'index' => 'movies',
-			'type'  => 'movies',
-			'body'  => [
+			'type' => 'movies',
+			'body' => [
 				'query' => [
 					'filtered' => [
 						'filter' => [
@@ -73,8 +80,8 @@ class QueryTest extends ElasticSearcherTestCase
 
 		$expectedQuery = [
 			'index' => 'movies',
-			'type'  => 'movies',
-			'body'  => [
+			'type' => 'movies',
+			'body' => [
 				'query' => [
 					'filtered' => [
 						'filter' => [
@@ -95,8 +102,8 @@ class QueryTest extends ElasticSearcherTestCase
 
 		$expectedQuery = [
 			'index' => 'movies',
-			'type'  => 'movies',
-			'body'  => [
+			'type' => 'movies',
+			'body' => [
 				'query' => [
 					'filtered' => [
 						'filter' => [
@@ -134,5 +141,29 @@ class QueryTest extends ElasticSearcherTestCase
 
 		$this->assertArrayHasKey('search_type', $raw);
 		$this->assertEquals('count', $raw['search_type']);
+	}
+
+	public function testQueryBuildingWithPrefixedIndex()
+	{
+		$query = new BooksFrom2014Query($this->getElasticSearcher());
+		$query->run(); // Needed because this calls setUp inside the query.
+
+		$this->assertEquals(['prefix_books'], $query->getIndices());
+		$this->assertEquals(['books'], $query->getTypes());
+
+		$expectedQuery = [
+			'index' => 'prefix_books',
+			'type' => 'books',
+			'body' => [
+				'query' => [
+					'bool' => [
+						'filter' => [
+							['term' => ['year' => 2014]]
+						]
+					]
+				]
+			]
+		];
+		$this->assertEquals($expectedQuery, $query->getRawQuery());
 	}
 }
