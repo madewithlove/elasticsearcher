@@ -126,7 +126,7 @@ abstract class AbstractQuery
 		foreach ($indices as $index) {
 			$index = $this->searcher->indicesManager()->getRegistered($index);
 
-			$this->indices[] = $index->getName();
+			$this->indices[] = $index->getInternalName();
 		}
 
 		// Remove doubles.

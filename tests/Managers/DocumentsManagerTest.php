@@ -2,6 +2,7 @@
 
 use ElasticSearcher\Managers\DocumentsManager;
 use ElasticSearcher\Dummy\Indexes\MoviesIndex;
+use ElasticSearcher\Dummy\Indexes\BooksIndex;
 
 class DocumentsManagerTest extends ElasticSearcherTestCase
 {
@@ -17,6 +18,7 @@ class DocumentsManagerTest extends ElasticSearcherTestCase
 		// Create our example index.
 		$indicesManager = $this->getElasticSearcher()->indicesManager();
 		$indicesManager->register(new MoviesIndex());
+		$indicesManager->register(new BooksIndex());
 
 		$this->documentsManager = $this->getElasticSearcher()->documentsManager();
 	}
@@ -121,5 +123,23 @@ class DocumentsManagerTest extends ElasticSearcherTestCase
 		]);
 		$document = $this->documentsManager->get('movies', 'movies', $id);
 		$this->assertEquals('2015', $document['_source']['year']);
+	}
+
+	public function testWithPrefixedIndex()
+	{
+		$id = 12345;
+		$data = [
+			'id' => $id,
+			'name' => 'Harry Potter and the wizards',
+		];
+
+		// Make sure the document doesn't exist.
+		if ($this->documentsManager->exists('books', 'books', $id)) {
+			$this->documentsManager->delete('books', 'books', $id);
+		}
+
+		$this->documentsManager->index('books', 'books', $data);
+		$this->assertTrue($this->documentsManager->exists('books', 'books', $id));
+		$this->assertEquals($data, $this->documentsManager->get('books', 'books', $id)['_source']);
 	}
 }

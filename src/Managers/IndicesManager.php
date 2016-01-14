@@ -111,7 +111,7 @@ class IndicesManager extends AbstractManager
 		$index = $this->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName()
+			'index' => $index->getInternalName()
 		];
 
 		return $this->elasticSearcher->getClient()->indices()->getMapping($params);
@@ -128,7 +128,7 @@ class IndicesManager extends AbstractManager
 		$index = $this->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName(),
+			'index' => $index->getInternalName(),
 			'type'  => $type
 		];
 
@@ -143,7 +143,7 @@ class IndicesManager extends AbstractManager
 		$index = $this->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName(),
+			'index' => $index->getInternalName(),
 			'body'  => $index->getBody()
 		];
 
@@ -162,7 +162,7 @@ class IndicesManager extends AbstractManager
 
 		foreach ($index->getTypes() as $type => $typeBody) {
 			$params = [
-				'index' => $index->getName(),
+				'index' => $index->getInternalName(),
 				'type'  => $type,
 				'body'  => [$type => $typeBody]
 			];
@@ -179,7 +179,7 @@ class IndicesManager extends AbstractManager
 		$index = $this->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName()
+			'index' => $index->getInternalName()
 		];
 
 		$this->elasticSearcher->getClient()->indices()->delete($params);
@@ -194,7 +194,7 @@ class IndicesManager extends AbstractManager
 		$index = $this->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName(),
+			'index' => $index->getInternalName(),
 			'type'  => $type
 		];
 
@@ -211,7 +211,7 @@ class IndicesManager extends AbstractManager
 		$index = $this->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName()
+			'index' => $index->getInternalName()
 		];
 
 		return $this->elasticSearcher->getClient()->indices()->exists($params);
@@ -228,7 +228,7 @@ class IndicesManager extends AbstractManager
 		$index = $this->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName(),
+			'index' => $index->getInternalName(),
 			'type'  => $type
 		];
 

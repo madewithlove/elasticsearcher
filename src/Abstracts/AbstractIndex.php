@@ -37,6 +37,17 @@ abstract class AbstractIndex
 	}
 
 	/**
+	 * The name used to communicate with the elasticsearch server. Can be used to
+	 * add a prefix but still use the name to refer to it.
+	 *
+	 * @return string
+	 */
+	public function getInternalName()
+	{
+		return $this->getName();
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getBody()
