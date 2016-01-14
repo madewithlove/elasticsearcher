@@ -3,6 +3,7 @@
 use ElasticSearcher\Managers\IndicesManager;
 use ElasticSearcher\Dummy\Indexes\AuthorsIndex;
 use ElasticSearcher\Dummy\Indexes\MoviesIndex;
+use ElasticSearcher\Dummy\Indexes\BooksIndex;
 
 class IndicesManagerTest extends ElasticSearcherTestCase
 {
@@ -74,5 +75,23 @@ class IndicesManagerTest extends ElasticSearcherTestCase
 		$this->indicesManager->delete('authors');
 
 		$this->assertFalse($this->indicesManager->exists('authors'));
+	}
+
+	public function testWithPrefixedIndex()
+	{
+		$booksIndex = new BooksIndex();
+		$this->indicesManager->register($booksIndex);
+		if ($this->indicesManager->exists('books')) {
+			$this->indicesManager->delete('books');
+		}
+
+		$this->indicesManager->create('books');
+		$this->assertTrue($this->indicesManager->exists('books'));
+
+		$expectedIndex = ['prefix_books' => ['mappings' => $booksIndex->getTypes()]];
+		$this->assertEquals($expectedIndex, $this->indicesManager->get('books'));
+
+		$this->indicesManager->delete('books');
+		$this->assertFalse($this->indicesManager->exists('books'));
 	}
 }

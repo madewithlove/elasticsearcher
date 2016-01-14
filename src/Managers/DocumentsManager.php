@@ -24,7 +24,7 @@ class DocumentsManager extends AbstractManager
 		$index = $this->elasticSearcher->indicesManager()->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName(),
+			'index' => $index->getInternalName(),
 			'type'  => $type,
 			'body'  => $data
 		];
@@ -63,7 +63,7 @@ class DocumentsManager extends AbstractManager
 		$index = $this->elasticSearcher->indicesManager()->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName(),
+			'index' => $index->getInternalName(),
 			'type'  => $type,
 			'id'    => $id
 		];
@@ -86,7 +86,7 @@ class DocumentsManager extends AbstractManager
 		$index = $this->elasticSearcher->indicesManager()->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName(),
+			'index' => $index->getInternalName(),
 			'type'  => $type,
 			'id'    => $id,
 			'body'  => ['doc' => $data]
@@ -107,7 +107,7 @@ class DocumentsManager extends AbstractManager
 		$index = $this->elasticSearcher->indicesManager()->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName(),
+			'index' => $index->getInternalName(),
 			'type'  => $type,
 			'id'    => $id,
 		];
@@ -146,7 +146,7 @@ class DocumentsManager extends AbstractManager
 		$index = $this->elasticSearcher->indicesManager()->getRegistered($indexName);
 
 		$params = [
-			'index' => $index->getName(),
+			'index' => $index->getInternalName(),
 			'type'  => $type,
 			'id'    => $id,
 		];
