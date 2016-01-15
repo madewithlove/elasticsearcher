@@ -3,7 +3,7 @@
 namespace ElasticSearcher\Dummy\Queries;
 
 use ElasticSearcher\Abstracts\AbstractQuery;
-use ElasticSearcher\Fragments\Queries\TermQuery;
+use ElasticSearcher\Fragments\Filters\TermFilter;
 
 class BooksFrom2014Query extends AbstractQuery
 {
@@ -11,6 +11,6 @@ class BooksFrom2014Query extends AbstractQuery
 	{
 		$this->searchIn('books', 'books');
 
-		$this->set('query.bool.filter', [new TermQuery('year', 2014)]);
+		$this->set('query.filtered.filter', [new TermFilter('year', 2014)]);
 	}
 }

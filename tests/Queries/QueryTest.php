@@ -156,7 +156,7 @@ class QueryTest extends ElasticSearcherTestCase
 			'type' => 'books',
 			'body' => [
 				'query' => [
-					'bool' => [
+					'filtered' => [
 						'filter' => [
 							['term' => ['year' => 2014]]
 						]
