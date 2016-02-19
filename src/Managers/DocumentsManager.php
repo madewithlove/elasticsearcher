@@ -46,9 +46,26 @@ class DocumentsManager extends AbstractManager
 	 */
 	public function bulkIndex($indexName, $type, array $data)
 	{
+		$params = ['body' => []];
+
 		foreach ($data as $item) {
-			$this->index($indexName, $type, $item);
+			$header = [
+				'_index' => $indexName,
+				'_type' => $type,
+			];
+
+			if (array_key_exists('id', $item)) {
+				$header['_id'] = $item['id'];
+			}
+
+			// The bulk operation expects two JSON objects for each item
+			// the first one should describe the operation, index, type
+			// and ID. The later one is the document body.
+			$params['body'][] = ['index' => $header];
+			$params['body'][] = $item;
 		}
+
+		$this->elasticSearcher->getClient()->bulk($params);
 	}
 
 	/**
