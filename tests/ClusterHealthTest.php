@@ -42,7 +42,7 @@ class ClusterHealthTest extends ElasticSearcherTestCase
             ->method('cluster')
             ->willReturn($this->clusterMock);
 
-        $this->assertTrue($this->getElasticSearcher()->isHealthy(), 'Could not detect if cluster is healthy');
+        $this->assertTrue($this->getElasticSearcher()->isHealthy(), 'Expected cluster to be healthy, but it is not');
     }
 
     public function testCanCheckIfSingleNodeClusterIsNoHealthy()
@@ -58,7 +58,7 @@ class ClusterHealthTest extends ElasticSearcherTestCase
             ->method('cluster')
             ->willReturn($this->clusterMock);
 
-        $this->assertFalse($this->getElasticSearcher()->isHealthy(), 'Could not detect if cluster is healthy');
+        $this->assertFalse($this->getElasticSearcher()->isHealthy(), 'Expected cluster to be healthy, but it is not');
     }
 
     public function testCanCheckIfMultiNodeClusterIsHealthy()
@@ -97,7 +97,7 @@ class ClusterHealthTest extends ElasticSearcherTestCase
             ->method('cluster')
             ->willReturn($this->clusterMock);
 
-        $this->assertFalse($this->getElasticSearcher()->isHealthy(), 'Could not detect if cluster is healthy');
-        $this->assertFalse($this->getElasticSearcher()->isHealthy(), 'Could not detect if cluster is healthy');
+        $this->assertFalse($this->getElasticSearcher()->isHealthy(), 'Expected cluster not to be healthy, but it is');
+        $this->assertFalse($this->getElasticSearcher()->isHealthy(), 'Expected cluster not to be healthy, but it is');
     }
 }
