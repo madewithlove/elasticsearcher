@@ -128,8 +128,7 @@ $manager->get('suggestions', 'movies', 123);
 ### Cluster Healthy
 
 Sometimes when you're re-indexing your ES data, you might have some issues between your index recreation and
-indexing your data. That's because ES can take a bit longer to recreate your indexes, causing your reindex task to fail
-- we are talking about _microseconds_ here. You can find some references [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html)
+indexing your data. That's because ES can take a bit longer to recreate your indexes, causing your reindex task to fail - we are talking about _microseconds_ here. You can find some references [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html)
 and [here](http://chrissimpson.co.uk/elasticsearch-yellow-cluster-status-explained.html).
 
 In order to avoid this, we built this helper in the ElasticSearcher class to check the cluster health. You can use
