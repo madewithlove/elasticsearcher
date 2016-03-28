@@ -30,22 +30,6 @@ class ClusterHealthTest extends ElasticSearcherTestCase
 		$this->getElasticSearcher()->setClient($this->clientMock);
 	}
 
-	public function testCanCheckIfSingleNodeClusterIsHealthy()
-	{
-		$this->clusterMock->expects($this->once())
-			->method('health')
-			->willReturn([
-				'status' => 'yellow',
-				'number_of_nodes' => 1,
-			]);
-
-		$this->clientMock->expects($this->once())
-			->method('cluster')
-			->willReturn($this->clusterMock);
-
-		$this->assertTrue($this->getElasticSearcher()->isHealthy(), 'Expected cluster to be healthy, but it is not');
-	}
-
 	public function testCanCheckIfSingleNodeClusterIsNoHealthy()
 	{
 		$this->clusterMock->expects($this->once())

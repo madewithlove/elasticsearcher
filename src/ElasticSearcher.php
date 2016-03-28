@@ -98,10 +98,6 @@ class ElasticSearcher
 	{
 		$info = $this->getClient()->cluster()->health();
 
-		if ($info['number_of_nodes'] == 1) {
-			return $info['status'] != 'red';
-		}
-
 		return $info['status'] == 'green';
 	}
 }
