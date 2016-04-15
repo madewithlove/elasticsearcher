@@ -30,59 +30,40 @@ class ClusterHealthTest extends ElasticSearcherTestCase
 		$this->getElasticSearcher()->setClient($this->clientMock);
 	}
 
-	public function testCanCheckIfSingleNodeClusterIsNoHealthy()
+	public function testCanCheckIfHealthyWhenStatusIsRed()
 	{
-		$this->clusterMock->expects($this->once())
-			->method('health')
-			->willReturn([
-				'status' => 'red',
-				'number_of_nodes' => 1,
-			]);
-
-		$this->clientMock->expects($this->once())
-			->method('cluster')
-			->willReturn($this->clusterMock);
-
-		$this->assertFalse($this->getElasticSearcher()->isHealthy(), 'Expected cluster not to be healthy, but it is');
+		$this->assertFalse($this->isClusterHealthy('red'), 'Expected cluster not to be healthy, but it is red');
 	}
 
-	public function testCanCheckIfMultiNodeClusterIsHealthy()
+	public function testCanCheckIfHealthyWhenStatusIsYellow()
 	{
-		$this->clusterMock->expects($this->once())
-			->method('health')
-			->willReturn([
-				'status' => 'green',
-				'number_of_nodes' => 2,
-			]);
-
-		$this->clientMock->expects($this->once())
-			->method('cluster')
-			->willReturn($this->clusterMock);
-
-		$this->assertTrue($this->getElasticSearcher()->isHealthy(), 'Expected cluster to be healthy, but it is not');
+		$this->assertFalse($this->isClusterHealthy('yellow'), 'Expected cluster not to be healthy, but it is yellow');
 	}
 
-	public function testCanCheckIfMultiNodeClusterIsNotHealthy()
+	public function testCanCheckIfHealthyWhenStatusIsGreen()
 	{
-		$this->clusterMock->expects($this->at(0))
-			->method('health')
-			->willReturn([
-				'status' => 'red',
-				'number_of_nodes' => 2,
-			]);
+		$this->assertTrue($this->isClusterHealthy('green'), 'Expected cluster to be healthy, but it is not green');
+	}
 
-			$this->clusterMock->expects($this->at(1))
+	/**
+	 * Check if the cluster is healthy, given the status of the cluster.
+	 *
+	 * @param string $status
+	 *
+	 * @return bool
+	 */
+	protected function isClusterHealthy($status = 'green')
+	{
+		$this->clusterMock->expects($this->any())
 			->method('health')
 			->willReturn([
-				'status' => 'yellow',
-				'number_of_nodes' => 2,
+				'status' => $status,
 			]);
 
 		$this->clientMock->expects($this->any())
 			->method('cluster')
 			->willReturn($this->clusterMock);
 
-		$this->assertFalse($this->getElasticSearcher()->isHealthy(), 'Expected cluster not to be healthy, but it is');
-		$this->assertFalse($this->getElasticSearcher()->isHealthy(), 'Expected cluster not to be healthy, but it is');
+		return $this->getElasticSearcher()->isHealthy();
 	}
 }
