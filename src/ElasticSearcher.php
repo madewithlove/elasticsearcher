@@ -90,4 +90,14 @@ class ElasticSearcher
 
 		return $this->documentsManager;
 	}
+
+	/**
+	 * @return bool
+	 */
+	public function isHealthy()
+	{
+		$info = $this->getClient()->cluster()->health();
+
+		return $info['status'] == 'green';
+	}
 }

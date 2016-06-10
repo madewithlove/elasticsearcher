@@ -125,6 +125,25 @@ $manager->exists('suggestions', 'movies', 123);
 $manager->get('suggestions', 'movies', 123);
 ```
 
+### Cluster Healthy
+
+Sometimes when you're re-indexing your ES data, you might have some issues between your index recreation and
+indexing your data. That's because ES can take a bit longer to recreate your indexes, causing your reindex task to fail - we are talking about _microseconds_ here. You can find some references [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html)
+and [here](http://chrissimpson.co.uk/elasticsearch-yellow-cluster-status-explained.html).
+
+In order to avoid this, we built this helper in the ElasticSearcher class to check the cluster health. You can use
+like this:
+
+```php
+<?php
+/** @var \ElasticSearcher\ElasticSearcher $searcher */
+while (!$searcher->isHealthy() { sleep(1); }
+```
+
+Place this in your reindex command between your index creation and the data indexing.
+
+__Attention__: If you're running a single ES node, you'll need to configure your elasticsearch `number_of_replicas` setting to `0`. However, we highly recommend you to use at least 2 nodes.
+
 ### Access to Elasticsearch client
 
 The package does not and will not try to implement everything from the Elasticsearch client. Access to the client is
