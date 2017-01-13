@@ -211,5 +211,6 @@ Vagrant.configure("2") do |config|
   ##########
   # We are using our own script to be able to install the latest version. VaproBash lags behind.
   config.vm.provision "shell", path: "./install-elasticsearch.sh"
+  config.vm.provision "shell", path: "./install-php7.sh"
 
 end
