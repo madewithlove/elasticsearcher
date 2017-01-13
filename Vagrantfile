@@ -23,8 +23,8 @@ hostname        = "elasticsearcher.dev"
 #   192.168.0.1 - 192.168.255.254
 server_ip             = "192.168.22.244"
 server_cpus           = "1"   # Cores
-server_memory         = "384" # MB
-server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
+server_memory         = "2048" # MB
+server_swap           = "2048" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
 
 # UTC        for Universal Coordinated Time
 # EST        for Eastern Standard Time
