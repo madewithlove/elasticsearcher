@@ -7,3 +7,4 @@ sudo apt-get update
 sudo apt-get install php7.0 -y
 sudo apt-get install php7.0-xml -y
 sudo apt-get install php7.0-mbstring -y
+sudo apt-get install php7.0-curl -y

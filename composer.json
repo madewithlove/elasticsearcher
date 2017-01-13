@@ -14,15 +14,19 @@
 		}
 	},
 	"require": {
-		"elasticsearch/elasticsearch": "~2.1",
+		"elasticsearch/elasticsearch": "^5.1",
 		"illuminate/support": "^4.2|~5"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "~4.3"
+		"phpunit/phpunit": "^5.7"
 	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "0.2-dev"
 		}
+	},
+	"config": {
+		"preferred-install": "dist",
+		"sort-packages": true
 	}
 }
