@@ -17,7 +17,7 @@ class MoviesIndex extends AbstractIndex
 			'movies' => [
 				'properties' => [
 					'id' => ['type' => 'integer'],
-					'name' => ['type' => 'string'],
+					'name' => ['type' => 'text'],
 					'year' => ['type' => 'integer'],
 				]
 			]

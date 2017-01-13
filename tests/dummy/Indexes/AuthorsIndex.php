@@ -17,14 +17,14 @@ class AuthorsIndex extends AbstractIndex
 			'directors' => [
 				'properties' => [
 					'id' => ['type' => 'integer'],
-					'first_name' => ['type' => 'string'],
-					'last_name' => ['type' => 'string']
+					'first_name' => ['type' => 'text'],
+					'last_name' => ['type' => 'text']
 				]
 			],
 			'producers' => [
 				'properties' => [
 					'id' => ['type' => 'integer'],
-					'name' => ['type' => 'string']
+					'name' => ['type' => 'text']
 				]
 			]
 		]);

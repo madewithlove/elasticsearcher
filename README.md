@@ -18,6 +18,7 @@ composer require madewithlove/elasticsearcher
 
 | Elasticsearch | Elasticsearcher |
 |---------------|-----------------|
+| >= 5.0        | >= 0.5          |
 | >= 2.0        | >= 0.4          |
 | >= 1.0, < 2.0 | 0.3             |
 
@@ -125,7 +126,7 @@ $manager->exists('suggestions', 'movies', 123);
 $manager->get('suggestions', 'movies', 123);
 ```
 
-### Cluster Healthy
+### Cluster Health
 
 Sometimes when you're re-indexing your ES data, you might have some issues between your index recreation and
 indexing your data. That's because ES can take a bit longer to recreate your indexes, causing your reindex task to fail - we are talking about _microseconds_ here. You can find some references [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html)

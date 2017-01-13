@@ -22,7 +22,7 @@ class BooksIndex extends AbstractIndex
 			'books' => [
 				'properties' => [
 					'id' => ['type' => 'integer'],
-					'name' => ['type' => 'string'],
+					'name' => ['type' => 'text'],
 				]
 			]
 		]);

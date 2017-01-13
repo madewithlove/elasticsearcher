@@ -26,12 +26,12 @@ class SuggestionsIndex extends \ElasticSearcher\Abstracts\AbstractIndex
       'books' => [
         'properties' => [
           'id' => ['type' => 'integer'],
-          'name' => ['type' => 'string'],
+          'name' => ['type' => 'text'],
         ]
       ],
       'movies' => [
         'properties' => [
-          'name' => ['type' => 'string'],
+          'name' => ['type' => 'text'],
         ]
       ]
     ]);
