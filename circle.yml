@@ -3,10 +3,14 @@ machine:
     version: 7.0.4
   java:
     version: openjdk8
+  environment:
+      ES_VERSION: 5.1.2
 
 dependencies:
   pre:
-    - sh ./install-elasticsearch.sh testing
+      - wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VERSION.tar.gz
+      - tar -xvf elasticsearch-$ES_VERSION.tar.gz
+      - elasticsearch-$ES_VERSION/bin/elasticsearch: {background: true}
 
 test:
   override:
