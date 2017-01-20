@@ -7,3 +7,7 @@ machine:
 dependencies:
   pre:
     - sh ./install-elasticsearch.sh testing
+
+test:
+  override:
+    - phpunit tests
