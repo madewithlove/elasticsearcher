@@ -20,7 +20,10 @@ rm elasticsearch-$ELASTICSEARCH_VERSION.deb
 sudo sed -i "s/#index.number_of_shards: 1/index.number_of_shards: 1/" /etc/elasticsearch/elasticsearch.yml
 sudo sed -i "s/#index.number_of_replicas: 0/index.number_of_replicas: 0/" /etc/elasticsearch/elasticsearch.yml
 sudo sed -i "s/#bootstrap.mlockall: true/bootstrap.mlockall: true/" /etc/elasticsearch/elasticsearch.yml
-sudo sed -i "s/#network.host: 192.168.0.1/network.host: 0.0.0.0/" /etc/elasticsearch/elasticsearch.yml
+if [ "$1" != "testing" ] ; then
+	echo ">>> Binding elasticsearch to all network hosts"
+	sudo sed -i "s/#network.host: 192.168.0.1/network.host: 0.0.0.0/" /etc/elasticsearch/elasticsearch.yml
+fi
 sudo service elasticsearch restart
 
 # Configure to start up Elasticsearch automatically

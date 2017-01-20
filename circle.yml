@@ -1,7 +1,9 @@
 machine:
   php:
     version: 7.0.4
+  java:
+    version: openjdk8
 
 dependencies:
   pre:
-    - sh ./install-elasticsearch.sh
+    - sh ./install-elasticsearch.sh testing
