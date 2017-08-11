@@ -40,7 +40,7 @@ Basic example:
 ```php
 use ElasticSearcher\Abstracts\QueryAbstract;
 
-class MoviesYouMightLikeQuery extends QueryAbstract
+class MoviesYouMightLikeQuery extends AbstractQuery
 {
   public function setup()
   {
