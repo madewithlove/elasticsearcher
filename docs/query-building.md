@@ -38,9 +38,9 @@ for easy manipulation. Here are some examples.
 Basic example:
 
 ```php
-use ElasticSearcher\Abstracts\QueryAbstract;
+use ElasticSearcher\Abstracts\AbstractQuery;
 
-class MoviesYouMightLikeQuery extends QueryAbstract
+class MoviesYouMightLikeQuery extends AbstractQuery
 {
   public function setup()
   {
