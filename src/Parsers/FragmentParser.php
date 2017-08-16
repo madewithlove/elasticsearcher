@@ -25,8 +25,8 @@ class FragmentParser
 
 					// Add the parsed fragment to the parent.
 					if ($item->mergeWithParent) {
-						$body = array_merge($body, $parsedBody);
 						unset($body[$key]);
+						$body = array_merge($body, $parsedBody);
 					} // Replace its current position with the parsed fragment.
 					else {
 						$item = $parsedBody;
