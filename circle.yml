@@ -4,7 +4,7 @@ machine:
   java:
     version: openjdk8
   environment:
-      ES_VERSION: 5.1.2
+      ES_VERSION: 5.5.2
 
 dependencies:
   pre:
