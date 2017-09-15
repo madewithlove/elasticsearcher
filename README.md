@@ -138,7 +138,7 @@ like this:
 ```php
 <?php
 /** @var \ElasticSearcher\ElasticSearcher $searcher */
-while (!$searcher->isHealthy() { sleep(1); }
+while (!$searcher->isHealthy()) { sleep(1); }
 ```
 
 Place this in your reindex command between your index creation and the data indexing.
