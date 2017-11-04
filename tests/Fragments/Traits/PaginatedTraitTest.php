@@ -15,4 +15,15 @@ class PaginatedTraitTest extends ElasticSearcherTestCase
 		$this->assertEquals('20', $raw['from']);
 		$this->assertEquals('10', $raw['size']);
 	}
+
+	public function testPaginatingWithPageZero()
+  {
+    $query = new PaginatedMoviesFrom2014Query($this->getElasticSearcher(), 0);
+    $query->paginate(0, 10);
+
+    $raw = $query->getRawQuery()['body'];
+
+    $this->assertEquals('0', $raw['from']);
+    $this->assertEquals('10', $raw['size']);
+  }
 }
