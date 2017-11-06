@@ -10,16 +10,9 @@ class PaginatedMoviesFrom2014Query extends AbstractQuery
 {
 	use PaginatedTrait;
 
-	private $pageNumber;
-
-	public function __construct(\ElasticSearcher\ElasticSearcher $searcher, $page = 3)
-  {
-    parent::__construct($searcher);
-    $this->pageNumber = $page;
-  }
-
-  public function setup()
+	public function setup()
 	{
-		$this->paginate($this->pageNumber, 10);
+		$page = isset($this->data['page']) ? $this->data['page'] : 3;
+		$this->paginate($page, 10);
 	}
 }
