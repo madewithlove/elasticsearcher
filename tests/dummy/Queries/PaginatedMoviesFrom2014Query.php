@@ -3,6 +3,7 @@
 namespace ElasticSearcher\Dummy\Queries;
 
 use ElasticSearcher\Abstracts\AbstractQuery;
+use ElasticSearcher\ElasticSearcher;
 use ElasticSearcher\Fragments\Traits\PaginatedTrait;
 
 class PaginatedMoviesFrom2014Query extends AbstractQuery
@@ -11,6 +12,7 @@ class PaginatedMoviesFrom2014Query extends AbstractQuery
 
 	public function setup()
 	{
-		$this->paginate(3, 10);
+		$page = isset($this->data['page']) ? $this->data['page'] : 3;
+		$this->paginate($page, 10);
 	}
 }

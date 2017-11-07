@@ -17,7 +17,7 @@ trait PaginatedTrait
 	 */
 	public function paginate($page, $perPage = 30)
 	{
-		$this->set('from', ($perPage * ($page - 1)));
+		$this->set('from', max(0, $perPage * ($page - 1)));
 		$this->set('size', $perPage);
 
 		return $this;
