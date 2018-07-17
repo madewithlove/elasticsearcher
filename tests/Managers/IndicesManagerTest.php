@@ -65,7 +65,11 @@ class IndicesManagerTest extends ElasticSearcherTestCase
 		$expectedIndex = ['authors' => ['mappings' => $authorsIndex->getTypes()]];
 		$this->assertEquals($expectedIndex, $this->indicesManager->get('authors'));
 
-		$expectedIndex = ['authors' => ['mappings' => array_only($authorsIndex->getTypes(), 'producers')]];
+		$expectedIndex = [
+			'authors' => [
+			    'mappings' => array_intersect_key($authorsIndex->getTypes(), array_flip((array) 'producers')),
+            ],
+		];
 		$this->assertEquals($expectedIndex, $this->indicesManager->getType('authors', 'producers'));
 	}
 
