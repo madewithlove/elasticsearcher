@@ -15,7 +15,7 @@
 	},
 	"require": {
 		"elasticsearch/elasticsearch": "^5.1",
-		"illuminate/support": "^4.2|~5"
+		"jdrieghe/array-helpers": "^0.2.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^5.7"
