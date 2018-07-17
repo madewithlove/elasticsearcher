@@ -6,7 +6,7 @@ use ElasticSearcher\ElasticSearcher;
 use ElasticSearcher\Parsers\ArrayResultParser;
 use ElasticSearcher\Parsers\FragmentParser;
 use ElasticSearcher\Traits\BodyTrait;
-use Illuminate\Support\Arr;
+use Tightenco\Collect\Support\Arr;
 
 /**
  * Base class for queries.
