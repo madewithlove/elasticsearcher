@@ -2,7 +2,7 @@
 
 namespace ElasticSearcher\Traits;
 
-use Illuminate\Support\Arr;
+use ArrayHelpers\Arr;
 
 /**
  * A body can be an entire query or just a chunk of query (fragment).

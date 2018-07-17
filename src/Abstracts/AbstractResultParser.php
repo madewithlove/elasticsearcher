@@ -2,7 +2,7 @@
 
 namespace ElasticSearcher\Abstracts;
 
-use Illuminate\Support\Arr;
+use ArrayHelpers\Arr;
 
 /**
  * Base class for result parsing.
