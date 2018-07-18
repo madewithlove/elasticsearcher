@@ -2,11 +2,11 @@
 
 namespace ElasticSearcher\Abstracts;
 
+use ArrayHelpers\Arr;
 use ElasticSearcher\ElasticSearcher;
 use ElasticSearcher\Parsers\ArrayResultParser;
 use ElasticSearcher\Parsers\FragmentParser;
 use ElasticSearcher\Traits\BodyTrait;
-use Illuminate\Support\Arr;
 
 /**
  * Base class for queries.
