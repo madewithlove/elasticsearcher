@@ -61,6 +61,6 @@ trait BodyTrait
 	 */
 	public function get($key, $default = null)
 	{
-		return Arr::get($this->body, $key, $default);
+		return Arr::get($this->getBody(), $key, $default);
 	}
 }
