@@ -14,4 +14,14 @@ class BodyTraitTest extends ElasticSearcherTestCase
 		$mock->set('key.nested', 'value');
 		$this->assertEquals(['key' => ['nested' => 'value']], $mock->getBody());
 	}
+
+	public function testGet()
+	{
+		$mock = $this->getMockForTrait(BodyTrait::class, [], '', true, true, true, ['getBody']);
+		$mock->expects($this->once())
+			->method('getBody')
+			->willReturn(['key' => 'value']);
+
+		$this->assertSame('value', $mock->get('key'));
+	}
 }
