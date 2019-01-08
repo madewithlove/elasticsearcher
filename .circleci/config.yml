@@ -1,0 +1,69 @@
+version: 2
+docker: &docker
+  - image: circleci/openjdk:8-node-browsers
+defaults: &defaults
+  steps:
+    - checkout
+    - run: sudo composer self-update
+    - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
+        keys:
+          - composer-v1-{{ checksum "composer.lock" }}
+          # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
+          - composer-v1-
+    - run: wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VERSION.tar.gz
+    - run: tar -xvf elasticsearch-$ES_VERSION.tar.gz
+    - run:
+        command: 
+          elasticsearch-$ES_VERSION/bin/elasticsearch
+        background: true
+    - run: ls && pwd
+    - run: composer install
+    - run:
+        name: phpunit
+        command: vendor/bin/phpunit tests
+    - save_cache: # special step to save the dependency cache with the `composer.lock` cache key template
+        key: composer-v1-{{ checksum "composer.lock" }}
+        paths:
+          - vendor
+
+jobs:
+  build:
+    environment:
+      ES_VERSION: 5.5.2
+    docker:
+      - image: circleci/php:7.0.33-node-browsers
+      - <<: *docker
+    <<: *defaults
+
+  build-71:
+    environment:
+      ES_VERSION: 5.5.2
+    docker:
+      - image: circleci/php:7.1.25-node-browsers
+      - <<: *docker
+    <<: *defaults
+
+  build-72:
+    environment:
+      ES_VERSION: 5.5.2
+    docker:
+      - image: circleci/php:7.2.13-node-browsers
+      - <<: *docker
+    <<: *defaults
+
+  build-73:
+    environment:
+      ES_VERSION: 5.5.2
+    docker:
+      - image: circleci/php:7.3.0-node-browsers
+      - <<: *docker
+    <<: *defaults
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - build-71
+      - build-72
+      - build-73
