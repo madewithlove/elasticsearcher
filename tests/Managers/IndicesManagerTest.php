@@ -55,6 +55,12 @@ class IndicesManagerTest extends ElasticSearcherTestCase
 		$this->assertTrue($this->indicesManager->existsType('authors', 'producers'));
 	}
 
+    public function testUpdating()
+    {
+        $this->indicesManager->create('authors');
+        $this->indicesManager->update('authors');
+    }
+
 	public function testGetting()
 	{
 		$this->indicesManager->create('authors');
