@@ -6,8 +6,7 @@ like the ElasticSearch SDK offers.
 
 ## Minimum query
 
-This basic example will return all documents in the `movies` type in the `suggestions` index. The type is optional, which
-would result in all documents inside the `suggestions` index would be returned.
+This basic example will return all documents in the `suggestions` index.
 
 ```php
 use ElasticSearcher\Abstracts\AbstractQuery;
@@ -16,7 +15,7 @@ class MoviesYouMightLikeQuery extends AbstractQuery
 {
   public function setup()
   {
-    $this->searchIn('suggestions', 'movies');
+    $this->searchIn('suggestions');
   }
 }
 ```

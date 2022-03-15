@@ -33,13 +33,13 @@ class DocumentsManagerTest extends ElasticSearcherTestCase
 		];
 
 		// Make sure the document doesn't exist.
-		if ($this->documentsManager->exists('movies', 'movies', $id)) {
-			$this->documentsManager->delete('movies', 'movies', $id);
+		if ($this->documentsManager->exists('movies', $id)) {
+			$this->documentsManager->delete('movies', $id);
 		}
 
-		$this->documentsManager->index('movies', 'movies', $data);
-		$this->assertTrue($this->documentsManager->exists('movies', 'movies', $id));
-		$this->assertEquals($data, $this->documentsManager->get('movies', 'movies', $id)['_source']);
+		$this->documentsManager->index('movies', $data);
+		$this->assertTrue($this->documentsManager->exists('movies', $id));
+		$this->assertEquals($data, $this->documentsManager->get('movies', $id)['_source']);
 	}
 
 	public function testBulkIndex()
@@ -62,11 +62,11 @@ class DocumentsManagerTest extends ElasticSearcherTestCase
 			],
 		];
 
-		$this->documentsManager->bulkIndex('movies', 'movies', $documents);
+		$this->documentsManager->bulkIndex('movies', $documents);
 
 		foreach ($documents as $document) {
-			$this->assertTrue($this->documentsManager->exists('movies', 'movies', $document['id']));
-			$this->assertEquals($document, $this->documentsManager->get('movies', 'movies', $document['id'])['_source']);
+			$this->assertTrue($this->documentsManager->exists('movies', $document['id']));
+			$this->assertEquals($document, $this->documentsManager->get('movies', $document['id'])['_source']);
 		}
 	}
 
@@ -79,10 +79,10 @@ class DocumentsManagerTest extends ElasticSearcherTestCase
 			'name' => 'The Guardians of the Galaxy',
 			'year' => 1915,
 		];
-		$this->documentsManager->updateOrIndex('movies', 'movies', $id, $data);
+		$this->documentsManager->updateOrIndex('movies', $id, $data);
 
-		$this->documentsManager->update('movies', 'movies', $id, ['year' => 2015]);
-		$this->assertEquals(2015, $this->documentsManager->get('movies', 'movies', $id)['_source']['year']);
+		$this->documentsManager->update('movies', $id, ['year' => 2015]);
+		$this->assertEquals(2015, $this->documentsManager->get('movies', $id)['_source']['year']);
 	}
 
 	public function testDelete()
@@ -94,10 +94,10 @@ class DocumentsManagerTest extends ElasticSearcherTestCase
 			'name' => 'The Guardians of the Galaxy',
 			'year' => 2015,
 		];
-		$this->documentsManager->updateOrIndex('movies', 'movies', $id, $data);
+		$this->documentsManager->updateOrIndex('movies', $id, $data);
 
-		$this->documentsManager->delete('movies', 'movies', $id);
-		$this->assertFalse($this->documentsManager->exists('movies', 'movies', $id));
+		$this->documentsManager->delete('movies', $id);
+		$this->assertFalse($this->documentsManager->exists('movies', $id));
 	}
 
 	public function testUpdateOrIndex()
@@ -105,23 +105,23 @@ class DocumentsManagerTest extends ElasticSearcherTestCase
 		$id = 12345;
 
 		// Make sure the document doesn't exist.
-		if ($this->documentsManager->exists('movies', 'movies', $id)) {
-			$this->documentsManager->delete('movies', 'movies', $id);
+		if ($this->documentsManager->exists('movies', $id)) {
+			$this->documentsManager->delete('movies', $id);
 		}
 
-		$this->documentsManager->updateOrIndex('movies', 'movies', $id, [
+		$this->documentsManager->updateOrIndex('movies', $id, [
 			'id' => $id,
 			'name' => 'Jurasic World',
 			'year' => 2014,
 		]);
-		$this->assertTrue($this->documentsManager->exists('movies', 'movies', $id));
+		$this->assertTrue($this->documentsManager->exists('movies', $id));
 
-		$this->documentsManager->updateOrIndex('movies', 'movies', $id, [
+		$this->documentsManager->updateOrIndex('movies', $id, [
 			'id' => $id,
 			'name' => 'Jurasic World',
 			'year' => 2015,
 		]);
-		$document = $this->documentsManager->get('movies', 'movies', $id);
+		$document = $this->documentsManager->get('movies', $id);
 		$this->assertEquals('2015', $document['_source']['year']);
 	}
 
@@ -134,12 +134,12 @@ class DocumentsManagerTest extends ElasticSearcherTestCase
 		];
 
 		// Make sure the document doesn't exist.
-		if ($this->documentsManager->exists('books', 'books', $id)) {
-			$this->documentsManager->delete('books', 'books', $id);
+		if ($this->documentsManager->exists('books', $id)) {
+			$this->documentsManager->delete('books', $id);
 		}
 
-		$this->documentsManager->index('books', 'books', $data);
-		$this->assertTrue($this->documentsManager->exists('books', 'books', $id));
-		$this->assertEquals($data, $this->documentsManager->get('books', 'books', $id)['_source']);
+		$this->documentsManager->index('books', $data);
+		$this->assertTrue($this->documentsManager->exists('books', $id));
+		$this->assertEquals($data, $this->documentsManager->get('books', $id)['_source']);
 	}
 }

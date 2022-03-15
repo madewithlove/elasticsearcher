@@ -108,23 +108,21 @@ foreach ($result->getResults() as $movie) {
 
 ```php
 $searcher->indicesManager()->exists('listings');
-$searcher->indicesManager()->existsType('suggestions', 'movies');
 $searcher->indicesManager()->create('suggestions');
 $searcher->indicesManager()->update('suggestions');
 $searcher->indicesManager()->delete('suggestions');
-$searcher->indicesManager()->deleteType('suggestions', 'movies');
 ```
 
 ### Documents management
 
 ```php
-$manager->index('suggestions', 'movies', $data);
-$manager->bulkIndex('suggestions', 'movies', [$data, $data, $data]);
-$manager->update('suggestions', 'movies', 123, ['name' => 'Fight Club 2014']);
-$manager->updateOrIndex('suggestions', 'movies', 123, ['name' => 'Fight Club 2014']);
-$manager->delete('suggestions', 'movies', 123);
-$manager->exists('suggestions', 'movies', 123);
-$manager->get('suggestions', 'movies', 123);
+$manager->index('suggestions', $data);
+$manager->bulkIndex('suggestions', [$data, $data, $data]);
+$manager->update('suggestions', 123, ['name' => 'Fight Club 2014']);
+$manager->updateOrIndex('suggestions', 123, ['name' => 'Fight Club 2014']);
+$manager->delete('suggestions', 123);
+$manager->exists('suggestions', 123);
+$manager->get('suggestions', 123);
 ```
 
 ### Cluster Health

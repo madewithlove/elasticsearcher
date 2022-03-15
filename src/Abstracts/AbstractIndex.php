@@ -57,19 +57,19 @@ abstract class AbstractIndex
 	}
 
 	/**
-	 * @param array $types
+	 * @param array $mappings
 	 *
 	 * @return array
 	 */
-	public function setTypes(array $types)
+	public function setMappings(array $mappings)
 	{
-		return $this->set('mappings', $types);
+		return $this->set('mappings', $mappings);
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getTypes()
+	public function getMappings()
 	{
 		return $this->get('mappings');
 	}
@@ -90,15 +90,5 @@ abstract class AbstractIndex
 	public function getSettings()
 	{
 		return $this->get('settings');
-	}
-
-	/**
-	 * @param string $type
-	 *
-	 * @return array
-	 */
-	public function getType($type)
-	{
-		return $this->get('mappings.'.$type);
 	}
 }

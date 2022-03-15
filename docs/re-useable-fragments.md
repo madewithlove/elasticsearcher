@@ -56,7 +56,7 @@ class AuthorsIndex extends AbstractIndex
 					]
 				]
 			],
-			'mappings' => $this->getTypes()
+			'mappings' => $this->getMappings()
 		];
 	}
 }
