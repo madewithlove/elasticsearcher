@@ -29,7 +29,7 @@ class QueryTest extends ElasticSearcherTestCase
 
 		// Index some test data.
 		$documentsManager = $this->getElasticSearcher()->documentsManager();
-		$documentsManager->bulkIndex('movies', 'movies',
+		$documentsManager->bulkIndex('movies',
 			[
 				['id' => 1, 'name' => 'Fury', 'year' => 2014],
 				['id' => 2, 'name' => 'Interstellar', 'year' => 2014],
@@ -54,11 +54,9 @@ class QueryTest extends ElasticSearcherTestCase
 		$query->run(); // Needed because this calls setUp inside the query.
 
 		$this->assertEquals(['movies'], $query->getIndices());
-		$this->assertEquals(['movies'], $query->getTypes());
 
 		$expectedQuery = [
 			'index' => 'movies',
-			'type' => 'movies',
 			'body' => [
 				'query' => [
 					'bool' => [
@@ -80,7 +78,6 @@ class QueryTest extends ElasticSearcherTestCase
 
 		$expectedQuery = [
 			'index' => 'movies',
-			'type' => 'movies',
 			'body' => [
 				'query' => [
 					'bool' => [
@@ -102,7 +99,6 @@ class QueryTest extends ElasticSearcherTestCase
 
 		$expectedQuery = [
 			'index' => 'movies',
-			'type' => 'movies',
 			'body' => [
 				'query' => [
 					'bool' => [
@@ -116,31 +112,15 @@ class QueryTest extends ElasticSearcherTestCase
 		$this->assertEquals($expectedQuery, $query->getRawQuery());
 	}
 
-	public function testSettingIndicesAndTypes()
+	public function testSettingIndices()
 	{
 		$query = $this->getMockForAbstractClass('\ElasticSearcher\Abstracts\AbstractQuery', [$this->getElasticSearcher()]);
 
 		$query->searchIn('movies');
 		$this->assertEquals(['movies'], $query->getIndices());
-		$this->assertEquals([], $query->getTypes());
 
-		$query->searchIn('movies', 'authors');
+		$query->searchIn(['movies']);
 		$this->assertEquals(['movies'], $query->getIndices());
-		$this->assertEquals(['authors'], $query->getTypes());
-
-		$query->searchIn(['movies'], ['authors', 'directors']);
-		$this->assertEquals(['movies'], $query->getIndices());
-		$this->assertEquals(['authors', 'directors'], $query->getTypes());
-	}
-
-	public function testSettingSearchType()
-	{
-		$query = new CountMoviesFrom2014Query($this->getElasticSearcher());
-
-		$raw = $query->getRawQuery();
-
-		$this->assertArrayHasKey('search_type', $raw);
-		$this->assertEquals('count', $raw['search_type']);
 	}
 
 	public function testQueryBuildingWithPrefixedIndex()
@@ -149,11 +129,9 @@ class QueryTest extends ElasticSearcherTestCase
 		$query->run(); // Needed because this calls setUp inside the query.
 
 		$this->assertEquals(['prefix_books'], $query->getIndices());
-		$this->assertEquals(['books'], $query->getTypes());
 
 		$expectedQuery = [
 			'index' => 'prefix_books',
-			'type' => 'books',
 			'body' => [
 				'query' => [
 					'bool' => [

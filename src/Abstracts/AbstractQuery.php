@@ -28,13 +28,6 @@ abstract class AbstractQuery
 	protected $indices = [];
 
 	/**
-	 * Types on which the query should be executed.
-	 *
-	 * @var array
-	 */
-	protected $types = [];
-
-	/**
 	 * Data that can be used when building a query.
 	 *
 	 * @var array
@@ -100,22 +93,16 @@ abstract class AbstractQuery
 	}
 
 	/**
-	 * Define on which indices and types the query should be run.
+	 * Define on which indices the query should be run.
 	 *
 	 * @param string|array $index
-	 * @param null|string|array $type
 	 */
-	public function searchIn($index, $type = null)
+	public function searchIn($index)
 	{
 		// Reset the current state, in case the same instance is re-used.
 		$this->indices = [];
-		$this->types = [];
 
 		$this->searchInIndices((array) $index);
-
-		if ($type !== null) {
-			$this->searchInTypes((array) $type);
-		}
 	}
 
 	/**
@@ -173,23 +160,6 @@ abstract class AbstractQuery
 	}
 
 	/**
-	 * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-search-type.html
-	 * @param string $type
-	 */
-	protected function setSearchType($type)
-	{
-		$this->setQueryStringParam('search_type', $type);
-	}
-
-	/**
-	 * @return string
-	 */
-	protected function getSearchType()
-	{
-		return $this->getQueryStringParam('search_type');
-	}
-
-	/**
 	 * Build the query by adding all chunks together.
 	 *
 	 * @return array
@@ -202,11 +172,6 @@ abstract class AbstractQuery
 
 		// Index always needs to be provided. _all means a cross index search.
 		$query['index'] = empty($this->indices) ? '_all' : implode(',', array_values($this->indices));
-
-		// Type is not required, will search in the entire index.
-		if (!empty($this->types)) {
-			$query['type'] = implode(',', array_values($this->types));
-		}
 
 		// Replace Fragments with their raw body.
 		$query['body'] = $this->fragmentParser->parse($this->body);
@@ -235,16 +200,6 @@ abstract class AbstractQuery
 	public function getIndices()
 	{
 		return $this->indices;
-	}
-
-	/**
-	 * Types we are searching in.
-	 *
-	 * @return array
-	 */
-	public function getTypes()
-	{
-		return $this->types;
 	}
 
 	/**

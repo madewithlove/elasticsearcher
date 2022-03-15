@@ -14,7 +14,7 @@
 		}
 	},
 	"require": {
-		"elasticsearch/elasticsearch": "^5.1 | ^6.0 | ^7.0",
+		"elasticsearch/elasticsearch": "^6.0 | ^7.0",
 		"jdrieghe/array-helpers": "^0.2.0"
 	},
 	"require-dev": {

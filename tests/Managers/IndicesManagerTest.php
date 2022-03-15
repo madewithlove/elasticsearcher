@@ -1,7 +1,6 @@
 <?php
 
 use ElasticSearcher\Managers\IndicesManager;
-use ElasticSearcher\Dummy\Indexes\AuthorsIndex;
 use ElasticSearcher\Dummy\Indexes\MoviesIndex;
 use ElasticSearcher\Dummy\Indexes\BooksIndex;
 
@@ -18,9 +17,9 @@ class IndicesManagerTest extends ElasticSearcherTestCase
 
 		// Create our example index.
 		$this->indicesManager = $this->getElasticSearcher()->indicesManager();
-		$this->indicesManager->register(new AuthorsIndex());
-		if ($this->indicesManager->exists('authors')) {
-			$this->indicesManager->delete('authors');
+		$this->indicesManager->register(new MoviesIndex());
+		if ($this->indicesManager->exists('movies')) {
+			$this->indicesManager->delete('movies');
 		}
 	}
 
@@ -48,43 +47,33 @@ class IndicesManagerTest extends ElasticSearcherTestCase
 
 	public function testCreating()
 	{
-		$this->indicesManager->create('authors');
+		$this->indicesManager->create('movies');
 
-		$this->assertTrue($this->indicesManager->exists('authors'));
-		$this->assertTrue($this->indicesManager->existsType('authors', 'directors'));
-		$this->assertTrue($this->indicesManager->existsType('authors', 'producers'));
+		$this->assertTrue($this->indicesManager->exists('movies'));
 	}
 
     public function testUpdating()
     {
-        $this->indicesManager->create('authors');
-        $this->indicesManager->update('authors');
+        $this->indicesManager->create('movies');
+        $this->indicesManager->update('movies');
     }
 
 	public function testGetting()
 	{
-		$this->indicesManager->create('authors');
-		$authorsIndex = new AuthorsIndex();
+		$this->indicesManager->create('movies');
+		$moviesIndex = new MoviesIndex();
 
-		$this->assertArrayHasKey('authors', $this->indicesManager->indices());
+		$this->assertArrayHasKey('movies', $this->indicesManager->indices());
 
-		$expectedIndex = ['authors' => ['mappings' => $authorsIndex->getTypes()]];
-		$this->assertEquals($expectedIndex, $this->indicesManager->get('authors'));
-
-		$expectedIndex = [
-			'authors' => [
-			    'mappings' => array_intersect_key($authorsIndex->getTypes(), array_flip((array) 'producers')),
-            ],
-		];
-		$this->assertEquals($expectedIndex, $this->indicesManager->getType('authors', 'producers'));
-	}
+        $expectedIndex = ['movies' => ['mappings' => $moviesIndex->getMappings()]];
+        $this->assertEquals($expectedIndex, $this->indicesManager->get('movies'));	}
 
 	public function testDeleting()
 	{
-		$this->indicesManager->create('authors');
-		$this->indicesManager->delete('authors');
+		$this->indicesManager->create('movies');
+		$this->indicesManager->delete('movies');
 
-		$this->assertFalse($this->indicesManager->exists('authors'));
+		$this->assertFalse($this->indicesManager->exists('movies'));
 	}
 
 	public function testWithPrefixedIndex()
@@ -98,7 +87,7 @@ class IndicesManagerTest extends ElasticSearcherTestCase
 		$this->indicesManager->create('books');
 		$this->assertTrue($this->indicesManager->exists('books'));
 
-		$expectedIndex = ['prefix_books' => ['mappings' => $booksIndex->getTypes()]];
+		$expectedIndex = ['prefix_books' => ['mappings' => $booksIndex->getMappings()]];
 		$this->assertEquals($expectedIndex, $this->indicesManager->get('books'));
 
 		$this->indicesManager->delete('books');

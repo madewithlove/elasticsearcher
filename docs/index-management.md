@@ -10,7 +10,7 @@ $manager = $searcher->indicesManager();
 ## Defining an index
 
 A simple [index](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/_basic_concepts.html#_index) exists
-out of a name and one or more types (+mappings). This can be created as:
+out of a name and +mappings. This can be created as:
 
 ```php
 class SuggestionsIndex extends \ElasticSearcher\Abstracts\AbstractIndex
@@ -22,17 +22,10 @@ class SuggestionsIndex extends \ElasticSearcher\Abstracts\AbstractIndex
 
   public function setup()
   {
-    $this->setTypes([
-      'books' => [
-        'properties' => [
-          'id' => ['type' => 'integer'],
-          'name' => ['type' => 'text'],
-        ]
-      ],
-      'movies' => [
-        'properties' => [
-          'name' => ['type' => 'text'],
-        ]
+    $this->setMappings([
+      'properties' => [
+        'id' => ['type' => 'integer'],
+        'name' => ['type' => 'text'],
       ]
     ]);
   }
@@ -77,13 +70,10 @@ $searcher->indicesManager()->registeredIndices();
 // Indices that exist in the server, not linked to the registered indices.
 $searcher->indicesManager()->indices();
 $searcher->indicesManager()->get('suggestions');
-$searcher->indicesManager()->getType('suggestions', 'books');
 
 // Other
 $searcher->indicesManager()->exists('listings');
-$searcher->indicesManager()->existsType('suggestions', 'movies');
 $searcher->indicesManager()->create('suggestions');
 $searcher->indicesManager()->update('suggestions');
 $searcher->indicesManager()->delete('suggestions');
-$searcher->indicesManager()->deleteType('suggestions', 'movies');
 ```
