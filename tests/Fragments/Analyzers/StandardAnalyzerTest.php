@@ -1,8 +1,9 @@
 <?php
 
 use ElasticSearcher\Fragments\Analyzers\StandardAnalyzer;
+use PHPUnit\Framework\TestCase;
 
-class StandardAnalyzerTest extends PHPUnit_Framework_TestCase
+class StandardAnalyzerTest extends TestCase
 {
 	public function testSimple()
 	{

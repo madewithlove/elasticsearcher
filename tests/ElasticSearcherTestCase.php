@@ -2,12 +2,13 @@
 
 use ElasticSearcher\Environment;
 use ElasticSearcher\ElasticSearcher;
+use PHPUnit\Framework\TestCase;
 
 /**
  * ElasticSearcher specific test case handling.
  * Will do some global setup/teardown.
  */
-class ElasticSearcherTestCase extends PHPUnit_Framework_TestCase
+class ElasticSearcherTestCase extends TestCase
 {
 	/**
 	 * @var ElasticSearcher
@@ -17,7 +18,7 @@ class ElasticSearcherTestCase extends PHPUnit_Framework_TestCase
 	/**
 	 * Create a test environment.
 	 */
-	public function setUp()
+	protected function setUp(): void
 	{
 		$env      = new Environment(
 			['hosts' => [ELASTICSEARCH_HOST]]

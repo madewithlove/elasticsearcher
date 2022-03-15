@@ -1,6 +1,8 @@
 <?php
 
-class ElasticSearcherTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ElasticSearcherTest extends TestCase
 {
 	public function testGetters()
 	{

@@ -11,7 +11,7 @@ class DocumentsManagerTest extends ElasticSearcherTestCase
 	 */
 	private $documentsManager;
 
-	public function setUp()
+	protected function setUp(): void
 	{
 		parent::setUp();
 

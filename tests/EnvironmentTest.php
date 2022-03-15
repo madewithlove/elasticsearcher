@@ -1,6 +1,8 @@
 <?php
 
-class EnvironmentTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class EnvironmentTest extends TestCase
 {
 	public function testConstructor()
 	{
@@ -12,7 +14,7 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase
 	public function testSet()
 	{
 		$env = new ElasticSearcher\Environment([]);
-		
+
 		$env->host = 'interstellar';
 
 		$this->assertEquals('interstellar', $env->host);

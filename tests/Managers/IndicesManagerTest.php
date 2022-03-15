@@ -12,7 +12,7 @@ class IndicesManagerTest extends ElasticSearcherTestCase
 	 */
 	private $indicesManager;
 
-	public function setUp()
+	protected function setUp(): void
 	{
 		parent::setUp();
 
