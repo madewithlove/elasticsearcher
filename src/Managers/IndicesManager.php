@@ -144,7 +144,7 @@ class IndicesManager extends AbstractManager
 
 		$this->elasticSearcher->getClient()->indices()->putMapping([
 			'index' => $index->getInternalName(),
-			'body'  => ['mappings' => $index->getMappings()]
+			'body'  => $index->getMappings(),
 		]);
 	}
 
