@@ -1,11 +1,17 @@
 version: '3.6'
 services:
   elasticsearch:
-    image: elasticsearch:5.6-alpine
+    image: elasticsearch:7.17.1
     ports:
       - 9200:9200
+
     environment:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
+      - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - HTTP_EXPOSE=9200
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
