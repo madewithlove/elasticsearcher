@@ -15,7 +15,7 @@ class ClusterHealthTest extends ElasticSearcherTestCase
 	 */
 	private $clusterMock;
 
-	public function setUp()
+	protected function setUp(): void
 	{
 		parent::setUp();
 

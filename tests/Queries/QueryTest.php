@@ -10,7 +10,7 @@ use ElasticSearcher\Dummy\Queries\BooksFrom2014Query;
 
 class QueryTest extends ElasticSearcherTestCase
 {
-	public function setUp()
+	protected function setUp(): void
 	{
 		parent::setUp();
 
