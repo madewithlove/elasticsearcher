@@ -3,7 +3,7 @@
 echo ">>> Installing Elasticsearch"
 
 # Set some variables
-ELASTICSEARCH_VERSION=5.5.2 # Check http://www.elasticsearch.org/download/ for latest version
+ELASTICSEARCH_VERSION=5.6.16 # Check http://www.elasticsearch.org/download/ for latest version
 
 # Install prerequisite: Java8
 echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
