@@ -51,7 +51,7 @@ abstract class AbstractResultParser
 	 */
 	public function getTotal()
 	{
-		return $this->get('hits.total');
+		return $this->get('hits.total')['value'];
 	}
 
 	/**
