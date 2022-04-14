@@ -23,7 +23,7 @@ abstract class AbstractIndex
 	abstract public function getName();
 
 	/**
-	 * @return array
+	 * @return void
 	 */
 	abstract public function setup();
 
