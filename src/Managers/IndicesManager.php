@@ -43,7 +43,7 @@ class IndicesManager extends AbstractManager
 	}
 
 	/**
-	 * @return AbstractIndex
+	 * @return void
 	 *
 	 * @param string $indexName
 	 */

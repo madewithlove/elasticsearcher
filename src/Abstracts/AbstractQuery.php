@@ -51,6 +51,11 @@ abstract class AbstractQuery
 	 */
 	protected $fragmentParser;
 
+    /**
+     * @var array
+     */
+    protected $types;
+
 	/**
 	 * Prepare the query. Add filters, sorting, ....
 	 */
