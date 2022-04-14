@@ -1,0 +1,8 @@
+includes:
+    - phpstan-ignore.neon
+
+parameters:
+    level: 0
+    paths:
+        - src
+        - tests
