@@ -1,6 +1,6 @@
 # elasticsearcher
 
-![Unit tests](https://github.com/madewithlove/elasticsearcher/actions/workflows/run-tests.yml/badge.svg)
+![checks](https://github.com/madewithlove/elasticsearcher/actions/workflows/run-checks.yml/badge.svg)
 
 This agnostic package is a lightweight wrapper on top of the [Elasticsearch PHP client](http://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html).
 Its main goal is to allow for easier structuring of queries and indices in your application. It does not want to hide or replace

@@ -1,4 +1,4 @@
-name: PHPUnit tests
+name: Checks
 
 on:
   push:
@@ -36,6 +36,9 @@ jobs:
       uses: getong/elasticsearch-action@v1.2
       with:
         elasticsearch version: 7.17.1
+
+    - name: Run PHPStan checks
+      run: ./vendor/bin/phpstan
 
     - name: Run test suite
       run: ./vendor/bin/phpunit
