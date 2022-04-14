@@ -9,7 +9,7 @@ class MoviesFromXYearQuery extends AbstractQuery
 {
 	public function setup()
 	{
-		$this->searchIn('movies', 'movies');
+		$this->searchIn('movies');
 
 		$body = array(
 			'query' => array(

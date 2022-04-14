@@ -20,7 +20,7 @@ class ElasticSearcherTestCase extends TestCase
 	 */
 	protected function setUp(): void
 	{
-		$env      = new Environment(
+		$env = new Environment(
 			['hosts' => [ELASTICSEARCH_HOST]]
 		);
 		$this->elasticSearcher = new ElasticSearcher($env);

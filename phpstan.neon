@@ -2,7 +2,9 @@ includes:
     - phpstan-ignore.neon
 
 parameters:
-    level: 0
+    level: 1
     paths:
         - src
         - tests
+    bootstrapFiles:
+        - tests/bootstrap.php
