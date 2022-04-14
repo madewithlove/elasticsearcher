@@ -9,7 +9,7 @@ class CountMoviesFrom2014Query extends AbstractQuery
 {
 	public function setup()
 	{
-		$this->searchIn('movies', 'movies');
+		$this->searchIn('movies');
 
 		$this->set('query.bool.filter', [new TermQuery('year', 2014)]);
 	}

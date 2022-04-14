@@ -15,7 +15,7 @@ class SortedQuery extends AbstractQuery
 			$this->sort($fields);
 		}
 
-		if ($fieldName = $this->getData('sort')) {
+		if ($this->getData('sort')) {
 			$this->sortBy($this->getData('sort'), $this->getData('sort_direction'));
 		}
 	}
