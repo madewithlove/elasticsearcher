@@ -1,6 +1,6 @@
 # elasticsearcher
 
-[![Circle CI](https://circleci.com/gh/madewithlove/elasticsearcher.svg?style=svg)](https://circleci.com/gh/madewithlove/elasticsearcher)
+![Unit tests](https://github.com/madewithlove/elasticsearcher/actions/workflows/run-tests.yml/badge.svg)
 
 This agnostic package is a lightweight wrapper on top of the [Elasticsearch PHP client](http://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html).
 Its main goal is to allow for easier structuring of queries and indices in your application. It does not want to hide or replace
